@@ -1,9 +1,17 @@
 
 public class Test {
-
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
+		String s1 = "GOOD title";
+		String s2 = "GOOD decription";
+		int sD = 1;
+		int eD = 2;
+		boolean urg = true;
+		boolean imp = false;
+		
+		Task task1 = new Task(s1, s2, sD, eD, urg, imp, Config.getIDCount());
+		System.out.println("Task 2");
+		Task task2 = new Task(s1, s2, sD, eD, urg, imp, Config.getIDCount());
 	}
-
 }
