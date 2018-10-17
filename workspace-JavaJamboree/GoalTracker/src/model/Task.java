@@ -9,12 +9,12 @@ public class Task {
 	private boolean urgent;
 	private boolean important;
 	private int ID;
+	private int taskNum;
 	
 	private int numDays;
 	private int priority;
-	private int dayOfTask;
 	
-	public Task(String titl, String desc, int sDate, int eDate, boolean urg, boolean imp, int id) {
+	public Task(String titl, String desc, int sDate, int eDate, boolean urg, boolean imp, int id, int fT) {
 		setTitle(titl);
 		setDescription(desc);
 		setStartDate(sDate);
@@ -22,6 +22,7 @@ public class Task {
 		setUrgent(urg);
 		setImportant(imp);
 		setID(id);
+		setTaskNum(fT);
 		
 		setNumDays(sDate, eDate);
 		setPriority(urg, imp);
@@ -35,6 +36,8 @@ public class Task {
 		System.out.println("ID is " + ID);
 		System.out.println("NumDays is " + numDays);
 		System.out.println("Priority is " + priority);
+		System.out.println("Task num is " + taskNum);
+		System.out.println("");
 	}
 	
 	private void setTitle(String titl) {
@@ -73,7 +76,7 @@ public class Task {
 		urgent = urg;
 	}
 	
-	public boolean geturgent() {
+	public boolean getUrgent() {
 		return urgent;
 	}
 	
@@ -93,8 +96,16 @@ public class Task {
 		return ID;
 	}
 	
+	private void setTaskNum(int fT) {
+		taskNum = fT;
+	}
+	
+	public int getTaskNum() {
+		return taskNum;
+	}
+	
 	private void setNumDays(int sDate, int eDate) {
-		numDays = eDate = sDate;
+		numDays = eDate - sDate;
 	}
 	
 	public int getNumDays() {
