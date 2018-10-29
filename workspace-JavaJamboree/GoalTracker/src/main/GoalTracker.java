@@ -9,7 +9,7 @@ import java.util.*;
 
 public class GoalTracker {
 	static JLabel lblMonth, lblYear;
-	static JButton btnPrev, btnNext, btnTask, btnSave, btnDelete, btnCancel;
+	static JButton btnPrev, btnNext, btnTask, btnGoal, btnSave, btnDelete, btnCancel;
 	static JTable tblCalendar;
 	static JComboBox cmbYear;
 	static JFrame frmMain, frmTask;
@@ -43,7 +43,8 @@ public class GoalTracker {
 		cmbYear = new JComboBox();
 		btnPrev = new JButton("Previous");
 		btnNext = new JButton("Next");
-		btnTask = new JButton("+");
+		btnTask = new JButton("Add Task");
+		btnGoal = new JButton("Add Goal");
 		mtblCalendar = new DefaultTableModel() {
 			public boolean isCellEditable(int rowIndex, int mColIndex) {
 				return true;
@@ -54,11 +55,6 @@ public class GoalTracker {
 		pnlCalendarMonth = new JPanel(null);
 
 		pnlCalendarMonth.setBorder(BorderFactory.createTitledBorder("Goal Tracker"));
-		// JTabbedPane tp = new JTabbedPane();
-		// tp.setBounds(100, 100, 700, 610);
-		// tp.add("main", pnlCalendarMonth);
-		// tp.add("visit", pnlCalendarMonth);
-		// frmMain.add(tp);
 
 		btnPrev.addActionListener(new btnPrev_Action());
 		btnNext.addActionListener(new btnNext_Action());
@@ -72,6 +68,7 @@ public class GoalTracker {
 		pnlCalendarMonth.add(btnPrev);
 		pnlCalendarMonth.add(btnNext);
 		pnlCalendarMonth.add(stblCalendar);
+		pnlCalendarMonth.add(btnGoal);
 		pnlCalendarMonth.add(btnTask);
 
 		pnlCalendarMonth.setBounds(100, 100, 700, 610);
@@ -79,7 +76,8 @@ public class GoalTracker {
 		cmbYear.setBounds(97, 335, 90, 525);
 		btnPrev.setBounds(10, 45, 90, 25);
 		btnNext.setBounds(620, 45, 66, 25);
-		btnTask.setBounds(620, 10, 66, 25);
+		btnGoal.setBounds(420, 10, 100, 25);
+		btnTask.setBounds(540, 10, 100, 25);
 		stblCalendar.setBounds(10, 70, 680, 500);
 
 		frmMain.setResizable(false);
@@ -217,7 +215,6 @@ public class GoalTracker {
 			frmTask.setSize(600, 600);
 			paneTask = frmTask.getContentPane();
 			paneTask.setLayout(null);
-			// frmTask.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			pnlTask = new JPanel(null);
 			paneTask.add(pnlTask);
 
