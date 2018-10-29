@@ -60,6 +60,7 @@ public class GoalTracker {
 		btnNext.addActionListener(new btnNext_Action());
 		cmbYear.addActionListener(new cmbYear_Action());
 		btnTask.addActionListener(new TaskUI());
+		btnGoal.addActionListener(new GoalUI());
 
 		pane.add(pnlCalendarMonth);
 		pnlCalendarMonth.add(lblMonth);
