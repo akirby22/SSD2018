@@ -1,8 +1,21 @@
 package model;
 
+import java.util.ArrayList;
+
 public class TaskTest {
 	
 	public static void main(String[] args) {
+		
+		ArrayList<Task> year = new ArrayList<Task>(365);
+		
+		int count = 0;
+		String temp = "";
+		while(count < 10) {
+			temp = "day" + count;
+			System.out.println(temp);
+			ArrayList<Task> day = new ArrayList<Task>();
+			count++;
+		}
 		
 		String s1 = "GOOD title";
 		String s2 = "GOOD decription";

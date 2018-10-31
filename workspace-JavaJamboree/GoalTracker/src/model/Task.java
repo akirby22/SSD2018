@@ -27,7 +27,7 @@ public class Task {
 		setNumDays(sDate, eDate);
 		setPriority(urg, imp);
 		
-		System.out.println(title);
+		/*System.out.println(title);
 		System.out.println(description);
 		System.out.println("StartDate is " + startDate);
 		System.out.println("EndDate is " + endDate);
@@ -37,7 +37,7 @@ public class Task {
 		System.out.println("NumDays is " + numDays);
 		System.out.println("Priority is " + priority);
 		System.out.println("Task num is " + taskNum);
-		System.out.println("");
+		System.out.println("");*/
 	}
 	
 	private void setTitle(String titl) {
