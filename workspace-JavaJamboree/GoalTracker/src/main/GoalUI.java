@@ -5,12 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class GoalUI implements ActionListener {
@@ -28,7 +26,7 @@ public class GoalUI implements ActionListener {
 		pnlGoal = new JPanel(null);
 		paneGoal.add(pnlGoal);
 
-		JLabel l1, l2, l3, l4;
+		JLabel l1, l2;
 		l1 = new JLabel("Title");
 		l1.setBounds(50, 70, 100, 30);
 		l2 = new JLabel("Description");

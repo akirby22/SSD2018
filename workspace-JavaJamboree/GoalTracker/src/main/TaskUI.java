@@ -1,12 +1,16 @@
 package main;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -29,7 +33,7 @@ public class TaskUI implements ActionListener {
 		paneTask.add(pnlTask);
 		frmTask.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JLabel l1, l2, l3, l4;
+		JLabel l1, l2, l3, l4, l5;
 		l1 = new JLabel("Title");
 		l1.setBounds(50, 70, 100, 30);
 		l2 = new JLabel("Description");
@@ -38,10 +42,14 @@ public class TaskUI implements ActionListener {
 		l3.setBounds(50, 125, 100, 30);
 		l4 = new JLabel("Is urgent");
 		l4.setBounds(50, 145, 100, 30);
+		l5 = new JLabel("Date Range");
+		l5.setBounds(50, 175, 100, 30);
 		pnlTask.add(l1);
 		pnlTask.add(l2);
 		pnlTask.add(l3);
 		pnlTask.add(l4);
+		pnlTask.add(l5);
+		
 
 		t1 = new JTextField("Title");
 		t1.setBounds(150, 70, 200, 30);
@@ -68,12 +76,21 @@ public class TaskUI implements ActionListener {
 		pnlTask.add(r3);
 		pnlTask.add(r4);
 
+		DateFormat format = new SimpleDateFormat("mm-dd-yyyy");
+		JFormattedTextField startDateTextField = new JFormattedTextField(format);
+		startDateTextField.setBounds(150, 175, 70, 20);
+		JFormattedTextField endDateTextField = new JFormattedTextField(format);
+		endDateTextField.setBounds(260, 175, 70, 20);
+		pnlTask.add(startDateTextField);
+		pnlTask.add(endDateTextField);
+
+
 		btnSave = new JButton("Save");
 		btnDelete = new JButton("Delete");
 		btnCancel = new JButton("Cancel");
-		btnSave.setBounds(50, 175, 66, 25);
-		btnDelete.setBounds(150, 175, 66, 25);
-		btnCancel.setBounds(250, 175, 66, 25);
+		btnSave.setBounds(50, 215, 66, 25);
+		btnDelete.setBounds(150, 215, 66, 25);
+		btnCancel.setBounds(250, 215, 66, 25);
 		pnlTask.add(btnSave);
 		pnlTask.add(btnDelete);
 		pnlTask.add(btnCancel);
@@ -88,6 +105,28 @@ public class TaskUI implements ActionListener {
 		});
 		frmTask.setResizable(false);
 		frmTask.setVisible(true);
+		// Date recordsModifiedSince = null;
+		// recordsModifiedSince = getPickDateDlg();
 
 	}
+
+	// private java.util.Date getPickDateDlg() {
+	// JPanel panel = new JPanel();
+	//
+	// JXDatePicker picker = new JXDatePicker();
+	// picker.setDate(Calendar.getInstance().getTime());
+	// picker.setFormats(new SimpleDateFormat("dd.MM.yyyy")); //$NON-NLS-1$
+	//
+	// panel.add(picker);
+	//
+	// int result = JOptionPane.showConfirmDialog(frmTask, panel,
+	// Messages.getString("ExportActionListener.1"), //$NON-NLS-1$
+	// JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+	// if (result == JOptionPane.OK_OPTION) {
+	// return picker.getDate();
+	// } else {
+	// return null;
+	// }
+	// }
+
 }
