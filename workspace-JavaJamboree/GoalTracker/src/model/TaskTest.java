@@ -37,7 +37,9 @@ public class TaskTest {
 		all.put(count, null);
 	}
 	
-	public int getIDCount() {
+	
+	
+	public static int getIDCount() {
 		int temp = idCount;
 		idCount++;
 		return temp;

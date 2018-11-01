@@ -1,11 +1,19 @@
 package model;
 
+import java.util.Date;
+import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.Period;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
+
 public class Task {
 	
 	private String title;
 	private String description;
-	private int startDate;
-	private int endDate;
+	private LocalDate startDate;
+	private LocalDate endDate;
 	private boolean urgent;
 	private boolean important;
 	private int ID;
@@ -14,7 +22,7 @@ public class Task {
 	private int numDays;
 	private int priority;
 	
-	public Task(String titl, String desc, int sDate, int eDate, boolean urg, boolean imp, int id, int fT) {
+	public Task(String titl, String desc, LocalDate sDate, LocalDate eDate, boolean urg, boolean imp, int id, int fT) {
 		setTitle(titl);
 		setDescription(desc);
 		setStartDate(sDate);
@@ -56,19 +64,19 @@ public class Task {
 		return description;
 	}
 	
-	private void setStartDate(int sDate) {
+	private void setStartDate(LocalDate sDate) {
 		startDate = sDate;
 	}
 	
-	public int getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 	
-	private void setEndDate(int eDate) {
+	private void setEndDate(LocalDate eDate) {
 		endDate = eDate;
 	}
 	
-	public int getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 	
@@ -104,8 +112,8 @@ public class Task {
 		return taskNum;
 	}
 	
-	private void setNumDays(int sDate, int eDate) {
-		numDays = eDate - sDate;
+	private void setNumDays(LocalDate sDate, LocalDate eDate) {
+		numDays = Days.daysBetween(sDate, eDate).getDays();
 	}
 	
 	public int getNumDays() {
