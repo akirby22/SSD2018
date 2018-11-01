@@ -9,6 +9,7 @@ public class Config {
 	private static int idCount = 0;
 	private static ArrayList<Task> taskList = new ArrayList<Task>();
 	
+	
 	public static int getIDCount() {
 		int temp = idCount;
 		idCount++;
