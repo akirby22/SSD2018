@@ -1,20 +1,19 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TaskTest {
 	
 	public static void main(String[] args) {
 		
-		ArrayList<Task> year = new ArrayList<Task>(365);
+		//ArrayList<ArrayList<Task>> group = new ArrayList<ArrayList<Task>>(365);
 		
-		int count = 0;
-		String temp = "";
+		int count = 1;
+		Map <Integer, ArrayList<Task>> tasks = new HashMap<>();
 		while(count < 10) {
-			temp = "day" + count;
-			System.out.println(temp);
-			ArrayList<Task> day = new ArrayList<Task>();
-			count++;
+			tasks.put(count, null);
 		}
 		
 		String s1 = "GOOD title";
