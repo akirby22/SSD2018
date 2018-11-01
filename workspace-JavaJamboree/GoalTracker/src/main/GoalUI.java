@@ -60,6 +60,13 @@ public class GoalUI implements ActionListener {
 				frmGoal.dispose();
 			}
 		});
+		
+		class btnSave implements ActionListener {
+			public void actionPerformed(ActionEvent e) {
+				//write to ".csv" file
+		
+			}
+		}
 
 		frmGoal.setResizable(false);
 		frmGoal.setVisible(true);

@@ -1,11 +1,14 @@
 package main;
 
-import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -16,6 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+
+import model.Task;
 
 public class TaskUI implements ActionListener {
 	static JFrame frmTask;
@@ -51,9 +56,9 @@ public class TaskUI implements ActionListener {
 		pnlTask.add(l5);
 		
 
-		t1 = new JTextField("Title");
+		t1 = new JTextField();
 		t1.setBounds(150, 70, 200, 30);
-		t2 = new JTextField("Description");
+		t2 = new JTextField();
 		t2.setBounds(150, 100, 200, 30);
 		pnlTask.add(t1);
 		pnlTask.add(t2);
@@ -78,9 +83,9 @@ public class TaskUI implements ActionListener {
 
 		DateFormat format = new SimpleDateFormat("mm-dd-yyyy");
 		JFormattedTextField startDateTextField = new JFormattedTextField(format);
-		startDateTextField.setBounds(150, 175, 70, 20);
+		startDateTextField.setBounds(150, 175, 70, 30);
 		JFormattedTextField endDateTextField = new JFormattedTextField(format);
-		endDateTextField.setBounds(260, 175, 70, 20);
+		endDateTextField.setBounds(260, 175, 70, 30);
 		pnlTask.add(startDateTextField);
 		pnlTask.add(endDateTextField);
 
@@ -103,30 +108,32 @@ public class TaskUI implements ActionListener {
 				frmTask.dispose();
 			}
 		});
+		
+		 Task task;
+		 task= new Task(t1.getText(), t2.getText(), 0, 0, false, false, 0, 0);
+		
+		btnSave.addActionListener(new ActionListener() 
+        {
+          @Override
+          public void actionPerformed(ActionEvent e) 
+          {
+        		FileWriter fileWriter;
+				try {
+					fileWriter = new FileWriter("src/test.csv", true);	 
+					fileWriter.write(task.getTitle() + task.getDescription() + task.getStartDate() + task.getEndDate() + task.getImportant() + task.getPriority()+ "0" +"0");
+					System.out.println(task.getTitle() + task.getDescription() + task.getStartDate() + task.getEndDate() + task.getImportant() + task.getPriority()+ "0" +"0");
+					System.out.println("completed");
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				
+				
+          }                     
+        });
+		
+
 		frmTask.setResizable(false);
 		frmTask.setVisible(true);
-		// Date recordsModifiedSince = null;
-		// recordsModifiedSince = getPickDateDlg();
-
 	}
-
-	// private java.util.Date getPickDateDlg() {
-	// JPanel panel = new JPanel();
-	//
-	// JXDatePicker picker = new JXDatePicker();
-	// picker.setDate(Calendar.getInstance().getTime());
-	// picker.setFormats(new SimpleDateFormat("dd.MM.yyyy")); //$NON-NLS-1$
-	//
-	// panel.add(picker);
-	//
-	// int result = JOptionPane.showConfirmDialog(frmTask, panel,
-	// Messages.getString("ExportActionListener.1"), //$NON-NLS-1$
-	// JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-	// if (result == JOptionPane.OK_OPTION) {
-	// return picker.getDate();
-	// } else {
-	// return null;
-	// }
-	// }
 
 }

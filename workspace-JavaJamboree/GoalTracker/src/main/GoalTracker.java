@@ -170,7 +170,6 @@ public class GoalTracker {
 			}
 			setBorder(null);
 			setForeground(Color.BLACK);
-
 			return this;
 		}
 	}
