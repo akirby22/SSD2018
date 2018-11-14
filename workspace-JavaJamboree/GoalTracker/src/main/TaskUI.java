@@ -120,14 +120,12 @@ public class TaskUI implements ActionListener {
         		FileWriter fileWriter;
 				try {
 					fileWriter = new FileWriter("src/test.csv", true);	 
-					fileWriter.write(task.getTitle() + task.getDescription() + task.getStartDate() + task.getEndDate() + task.getImportant() + task.getPriority()+ "0" +"0");
-					System.out.println(task.getTitle() + task.getDescription() + task.getStartDate() + task.getEndDate() + task.getImportant() + task.getPriority()+ "0" +"0");
+					fileWriter.write(task.getTitle() + task.getDescription() + task.getStartDate() + task.getEndDate() + task.getUrgent() + task.getImportant() + task.getID() + task.getTaskNum());
+					System.out.println(task.getTitle() + task.getDescription() + task.getStartDate() + task.getEndDate() + task.getUrgent() + task.getImportant() + task.getID() + task.getTaskNum());
 					System.out.println("completed");
 				} catch (IOException e1) {
 					e1.printStackTrace();
-				}
-				
-				
+				}	
           }                     
         });
 		

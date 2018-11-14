@@ -20,11 +20,13 @@ public class Task {
 	private boolean important;
 	private int ID;
 	private int taskNum;
+	private String goalDescription;
+	private int goalID;
 	
 	private int numDays;
 	private int priority;
 	
-	public Task(String titl, String desc, int sDate, int eDate, boolean urg, boolean imp, int id, int fT) {
+	public Task(String titl, String desc, int sDate, int eDate, boolean urg, boolean imp, int id, int fT, String goalDesc, int gID) {
 		setTitle(titl);
 		setDescription(desc);
 		//setStartDate(sDate);
@@ -35,6 +37,8 @@ public class Task {
 		setImportant(imp);
 		setID(id);
 		setTaskNum(fT);
+		setGoalDescription(goalDesc);
+		setGoalID(gID);
 		
 		setNumDays(sDate, eDate);
 		setPriority(urg, imp);
@@ -49,6 +53,8 @@ public class Task {
 		System.out.println("NumDays is " + numDays);
 		System.out.println("Priority is " + priority);
 		System.out.println("Task num is " + taskNum);
+		System.out.println(goalDescription);
+		System.out.println("Goal ID is " + goalID);
 		System.out.println("");
 	}
 	
@@ -126,6 +132,22 @@ public class Task {
 	
 	public int getTaskNum() {
 		return taskNum;
+	}
+	
+	private void setGoalDescription(String goalDesc) {
+		goalDescription = goalDesc;
+	}
+	
+	public String getGoalDescription() {
+		return goalDescription;
+	}
+	
+	private void setGoalID(int gID) {
+		goalID = gID;
+	}
+	
+	public int getGoalID() {
+		return goalID;
 	}
 	
 	/*private void setNumDays(LocalDate sDate, LocalDate eDate) {
