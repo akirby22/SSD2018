@@ -17,18 +17,19 @@ public class TaskTest {
 		boolean imp = false;
 		final int firstTask = 1;
 		
-		Task task1 = new Task(s1, s2, sD, eD, urg, imp, config.Config.getIDCount(), firstTask);
+		Task task1 = new Task(s1, s2, sD, eD, urg, imp, getIDCount(), firstTask);
 		createTasks(task1);
 		getSize();
 		
 		System.out.println("");
-		Task task2 = new Task(s1, s2, sD, eD + 4, urg, imp, config.Config.getIDCount(), firstTask);
+		Task task2 = new Task(s1, s2, sD, eD + 4, urg, imp, getIDCount(), firstTask);
 		createTasks(task2);
 		getSize();
-	}//end of Main
+	}
+	//************************************END OF MAIN************************************************************
 	
 	private static int idCount;
-	private static ArrayList<Task> taskList = new ArrayList<Task>();
+	private static ArrayList<Task> allTasks = new ArrayList<Task>();
 	
 	public static void makeArray() {
 		int count = 0;
@@ -46,12 +47,9 @@ public class TaskTest {
 	}
 	
 	public static void createTasks(Task task) {
-		if(task.getNumDays() == 1) { //only one day left
-			taskList.add(task);
-		}
-		else { //not last day
-			taskList.add(task);
-			
+		allTasks.add(task);
+		
+		if(task.getNumDays() != 0) { //not last day
 			Task temp = new Task(task.getTitle(), task.getDescription(), task.getStartDate() + 1, 
 					task.getEndDate(), task.getUrgent(), task.getImportant(), task.getID(), task.getTaskNum() + 1);
 			createTasks(temp);
@@ -60,6 +58,6 @@ public class TaskTest {
 	
 	public static void getSize() {
 		System.out.println("");
-		System.out.println("Array Size: " + taskList.size());
+		System.out.println("Array Size: " + allTasks.size());
 	}
 }
