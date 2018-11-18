@@ -134,6 +134,7 @@ public class TaskUI implements ActionListener {
 			}
 		});
 
+
 		frmTask.setResizable(false);
 		frmTask.setVisible(true);
 	}
