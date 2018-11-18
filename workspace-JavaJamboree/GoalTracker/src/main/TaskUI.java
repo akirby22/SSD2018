@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,11 +27,12 @@ public class TaskUI implements ActionListener {
 	static Container paneTask;
 	static JPanel pnlTask;
 	static JButton btnSave, btnDelete, btnCancel;
-	JLabel l1, l2, l3, l4, l5;
+	JLabel l1, l2, l3, l4, l5, l6;
 	ButtonGroup impgroup = new ButtonGroup();
 	ButtonGroup prioritygroup = new ButtonGroup();
 	JRadioButton r1, r2, r3, r4;
 	DateFormat format = new SimpleDateFormat("mm-dd-yyyy");
+	JComboBox<String> c;
 
 	public void actionPerformed(ActionEvent e) {
 		frmTask = new JFrame("Task");
@@ -52,12 +54,18 @@ public class TaskUI implements ActionListener {
 		l4.setBounds(50, 145, 100, 30);
 		l5 = new JLabel("Date Range");
 		l5.setBounds(50, 175, 100, 30);
+		l6 = new JLabel("Choose Goal");
+		l6.setBounds(50, 40, 100, 30);
 		pnlTask.add(l1);
 		pnlTask.add(l2);
 		pnlTask.add(l3);
 		pnlTask.add(l4);
 		pnlTask.add(l5);
+		pnlTask.add(l6);
 
+		c = new JComboBox<String>();
+		c.setBounds(150, 40, 200, 30);
+		pnlTask.add(c);
 		t1 = new JTextField();
 		t1.setBounds(150, 70, 200, 30);
 		t2 = new JTextField();
@@ -117,14 +125,15 @@ public class TaskUI implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Task task;
-				task = new Task(t1.getText(), t2.getText(), 0, 0, r1.isSelected(), r3.isSelected(), 0, 0 ,"tempgoaldesc", 0);
+				task = new Task(t1.getText(), t2.getText(), 0, 0, r1.isSelected(), r3.isSelected(), 0, 0,
+						"tempgoaldesc", 0);
 				FileWriter fileWriter;
 				try {
 					fileWriter = new FileWriter("src/test.csv", true);
 					BufferedWriter br = new BufferedWriter(fileWriter);
 					br.write(task.getTitle() + "\t" + task.getDescription() + "\t" + task.getStartDate() + "\t"
 							+ task.getEndDate() + "\t" + task.getImportant() + "\t" + task.getPriority() + "\t" + "0"
-							+ "\t" + "0");
+							+ "\t" + "0" + task.getGoalDescription() + "\t" + task.getGoalID());
 					System.out.println("task updated");
 					br.close();
 				} catch (IOException e1) {
@@ -133,7 +142,6 @@ public class TaskUI implements ActionListener {
 
 			}
 		});
-
 
 		frmTask.setResizable(false);
 		frmTask.setVisible(true);

@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -60,11 +61,11 @@ public class GoalUI implements ActionListener {
 				frmGoal.dispose();
 			}
 		});
-		
+
 		class btnSave implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
-				//write to ".csv" file
-		
+				// write to ".csv" file
+
 			}
 		}
 
