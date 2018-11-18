@@ -117,7 +117,7 @@ public class TaskUI implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Task task;
-				task = new Task(t1.getText(), t2.getText(), 0, 0, r1.isSelected(), r3.isSelected(), 0, 0);
+				task = new Task(t1.getText(), t2.getText(), 0, 0, r1.isSelected(), r3.isSelected(), 0, 0 ,"tempgoaldesc", 0);
 				FileWriter fileWriter;
 				try {
 					fileWriter = new FileWriter("src/test.csv", true);
