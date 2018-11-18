@@ -8,7 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -27,6 +26,11 @@ public class TaskUI implements ActionListener {
 	static Container paneTask;
 	static JPanel pnlTask;
 	static JButton btnSave, btnDelete, btnCancel;
+	JLabel l1, l2, l3, l4, l5;
+	ButtonGroup impgroup = new ButtonGroup();
+	ButtonGroup prioritygroup = new ButtonGroup();
+	JRadioButton r1, r2, r3, r4;
+	DateFormat format = new SimpleDateFormat("mm-dd-yyyy");
 
 	public void actionPerformed(ActionEvent e) {
 		frmTask = new JFrame("Task");
@@ -38,7 +42,6 @@ public class TaskUI implements ActionListener {
 		paneTask.add(pnlTask);
 		frmTask.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JLabel l1, l2, l3, l4, l5;
 		l1 = new JLabel("Title");
 		l1.setBounds(50, 70, 100, 30);
 		l2 = new JLabel("Description");
@@ -54,7 +57,6 @@ public class TaskUI implements ActionListener {
 		pnlTask.add(l3);
 		pnlTask.add(l4);
 		pnlTask.add(l5);
-		
 
 		t1 = new JTextField();
 		t1.setBounds(150, 70, 200, 30);
@@ -62,10 +64,14 @@ public class TaskUI implements ActionListener {
 		t2.setBounds(150, 100, 200, 30);
 		pnlTask.add(t1);
 		pnlTask.add(t2);
-		JRadioButton r1 = new JRadioButton("Yes");
-		JRadioButton r2 = new JRadioButton("No");
-		JRadioButton r3 = new JRadioButton("Yes");
-		JRadioButton r4 = new JRadioButton("No");
+		r1 = new JRadioButton("Yes");
+		r2 = new JRadioButton("No");
+		impgroup.add(r1);
+		impgroup.add(r2);
+		r3 = new JRadioButton("Yes");
+		r4 = new JRadioButton("No");
+		prioritygroup.add(r3);
+		prioritygroup.add(r4);
 		r1.setBounds(150, 125, 100, 30);
 		r2.setBounds(225, 125, 100, 30);
 		r3.setBounds(150, 145, 100, 30);
@@ -81,14 +87,12 @@ public class TaskUI implements ActionListener {
 		pnlTask.add(r3);
 		pnlTask.add(r4);
 
-		DateFormat format = new SimpleDateFormat("mm-dd-yyyy");
 		JFormattedTextField startDateTextField = new JFormattedTextField(format);
 		startDateTextField.setBounds(150, 175, 70, 30);
 		JFormattedTextField endDateTextField = new JFormattedTextField(format);
 		endDateTextField.setBounds(260, 175, 70, 30);
 		pnlTask.add(startDateTextField);
 		pnlTask.add(endDateTextField);
-
 
 		btnSave = new JButton("Save");
 		btnDelete = new JButton("Delete");
@@ -108,29 +112,27 @@ public class TaskUI implements ActionListener {
 				frmTask.dispose();
 			}
 		});
-		
-		 Task task;
-		 task= new Task(t1.getText(), t2.getText(), 0, 0, false, false, 0, 0);
-		
-		btnSave.addActionListener(new ActionListener() 
-        {
-          @Override
-          public void actionPerformed(ActionEvent e) 
-          {
-        		FileWriter fileWriter;
+
+		btnSave.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Task task;
+				task = new Task(t1.getText(), t2.getText(), 0, 0, r1.isSelected(), r3.isSelected(), 0, 0);
+				FileWriter fileWriter;
 				try {
-					fileWriter = new FileWriter("src/test.csv", true);	 
-					fileWriter.write(task.getTitle() + task.getDescription() + task.getStartDate() + task.getEndDate() + task.getImportant() + task.getPriority()+ "0" +"0");
-					System.out.println(task.getTitle() + task.getDescription() + task.getStartDate() + task.getEndDate() + task.getImportant() + task.getPriority()+ "0" +"0");
-					System.out.println("completed");
+					fileWriter = new FileWriter("src/test.csv", true);
+					BufferedWriter br = new BufferedWriter(fileWriter);
+					br.write(task.getTitle() + "\t" + task.getDescription() + "\t" + task.getStartDate() + "\t"
+							+ task.getEndDate() + "\t" + task.getImportant() + "\t" + task.getPriority() + "\t" + "0"
+							+ "\t" + "0");
+					System.out.println("task updated");
+					br.close();
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				
-				
-          }                     
-        });
-		
+
+			}
+		});
 
 		frmTask.setResizable(false);
 		frmTask.setVisible(true);
