@@ -53,7 +53,8 @@ public class TaskUI implements ActionListener {
 		try (BufferedReader br = new BufferedReader(new FileReader("src/goals.csv"))) {
 			String sCurrentLine;
 			while ((sCurrentLine = br.readLine()) != null) {
-				Goals.add(sCurrentLine);
+				if (!Goals.contains(sCurrentLine))
+					Goals.add(sCurrentLine);
 			}
 
 			l1 = new JLabel("Title");
@@ -78,7 +79,6 @@ public class TaskUI implements ActionListener {
 			c = new JComboBox<String>();
 			c.setBounds(150, 40, 200, 30);
 			pnlTask.add(c);
-			int count = 0;
 			for (int i = 0; i < Goals.size(); i++)
 				c.addItem(Goals.get(i));
 			t1 = new JTextField();
