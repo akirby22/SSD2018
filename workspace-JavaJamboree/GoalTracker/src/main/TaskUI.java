@@ -148,7 +148,7 @@ public class TaskUI implements ActionListener {
 						BufferedWriter br = new BufferedWriter(fileWriter);
 						br.write(task.getTitle() + "\t" + task.getDescription() + "\t" + task.getStartDate() + "\t"
 								+ task.getEndDate() + "\t" + task.getImportant() + "\t" + task.getPriority() + "\t"
-								+ "0" + "\t" + "0" + task.getGoalDescription() + "\t" + task.getGoalID());
+								+ "0" + "\t" + "0" + task.getGoalDescription() + "\t" + task.getGoalID() + "\n");
 						System.out.println("task updated");
 						br.close();
 					} catch (IOException e1) {

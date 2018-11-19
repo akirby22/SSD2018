@@ -11,7 +11,7 @@ public class GoalTracker {
 	static JLabel lblMonth, lblYear;
 	static JButton btnPrev, btnNext, btnTask, btnGoal, btnSave, btnDelete, btnCancel;
 	static JTable tblCalendar;
-	static JComboBox cmbYear;
+	static JComboBox<String> cmbYear;
 	static JFrame frmMain, frmTask;
 	static Container pane, paneTask;
 	static DefaultTableModel mtblCalendar;
