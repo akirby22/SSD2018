@@ -3,6 +3,9 @@ package main;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -11,6 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import model.Goal;
+import model.Task;
 
 public class GoalUI implements ActionListener {
 	static JFrame frmGoal;
@@ -62,12 +68,24 @@ public class GoalUI implements ActionListener {
 			}
 		});
 
-		class btnSave implements ActionListener {
+		btnSave.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
-				// write to ".csv" file
+				Goal goal;
+				goal = new Goal(t1.getText(), t2.getText());
+				FileWriter fileWriter;
+				try {
+					fileWriter = new FileWriter("src/goals.csv", true);
+					BufferedWriter br = new BufferedWriter(fileWriter);
+					br.write(goal.getGTitle() + "\t" + goal.getGDescription() + "\n");
+					System.out.println("Goal updated");
+					br.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 
 			}
-		}
+		});
 
 		frmGoal.setResizable(false);
 		frmGoal.setVisible(true);
