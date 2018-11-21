@@ -7,23 +7,23 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-public class GoalTracker {
+public class GoalTrackerWeek {
 	static JLabel lblMonth, lblYear;
 	static JButton btnPrev, btnNext, btnTask, btnGoal, btnSave, btnDelete, btnCancel;
-	static JTable mnthTblCalendar, weekTblCalendar;
+	static JTable weekTblCalendar;
 	static JComboBox<String> cmbYear;
 	static JFrame frmMain, frmTask;
 	static Container pane, paneTask;
 	static DefaultTableModel mtblCalendar, wtblCalendar;
-	static JScrollPane mstblCalendar;
-	static JPanel pnlCalendarMonth, pnlTask, pnlCalendarWeek;
-	static int realYear, realMonth, realDay, currentYear, currentMonth;
+	static JScrollPane wstblCalendar;
+	static JPanel pnlTask, pnlCalendarWeek;
+	static int realYear, realMonth, realWeek, realDay, currentYear, currentMonth;
 	static JTabbedPane tabs;
 
 	public static void main(String args[]) {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			new GoalTracker();
+			new GoalTrackerWeek();
 		} catch (ClassNotFoundException e) {
 		} catch (InstantiationException e) {
 		} catch (IllegalAccessException e) {
@@ -32,8 +32,8 @@ public class GoalTracker {
 
 	}
 
-	GoalTracker() {
-		frmMain = new JFrame("SSD");
+	GoalTrackerWeek() {
+		frmMain = new JFrame("SSDweek");
 		frmMain.setSize(900, 900);
 		pane = frmMain.getContentPane();
 		pane.setLayout(null);
@@ -61,16 +61,17 @@ public class GoalTracker {
 		btnNext = new JButton("Next");
 		btnTask = new JButton("Add Task");
 		btnGoal = new JButton("Add Goal");
-		mtblCalendar = new DefaultTableModel() {
+		wtblCalendar = new DefaultTableModel() {
 			public boolean isCellEditable(int rowIndex, int mColIndex) {
 				return true;
 			}
 		};
-		mnthTblCalendar = new JTable(mtblCalendar);
-		mstblCalendar = new JScrollPane(mnthTblCalendar);
-		pnlCalendarMonth = new JPanel(null);
 
-		pnlCalendarMonth.setBorder(BorderFactory.createTitledBorder("Goal Tracker"));
+		weekTblCalendar = new JTable(wtblCalendar);
+		wstblCalendar = new JScrollPane(weekTblCalendar);
+		pnlCalendarWeek = new JPanel(null);
+
+		pnlCalendarWeek.setBorder(BorderFactory.createTitledBorder("Goal Tracker week"));
 
 		btnPrev.addActionListener(new btnPrev_Action());
 		btnNext.addActionListener(new btnNext_Action());
@@ -78,67 +79,68 @@ public class GoalTracker {
 		btnTask.addActionListener(new TaskUI());
 		btnGoal.addActionListener(new GoalUI());
 
-		pane.add(pnlCalendarMonth);
-		pnlCalendarMonth.add(lblMonth);
-		pnlCalendarMonth.add(lblYear);
-		pnlCalendarMonth.add(cmbYear);
-		pnlCalendarMonth.add(btnPrev);
-		pnlCalendarMonth.add(btnNext);
-		pnlCalendarMonth.add(mstblCalendar);
-		pnlCalendarMonth.add(btnGoal);
-		pnlCalendarMonth.add(btnTask);
+		pane.add(pnlCalendarWeek);
+		pnlCalendarWeek.add(lblMonth);
+		pnlCalendarWeek.add(lblYear);
+		pnlCalendarWeek.add(cmbYear);
+		pnlCalendarWeek.add(btnPrev);
+		pnlCalendarWeek.add(btnNext);
+		pnlCalendarWeek.add(wstblCalendar);
+		pnlCalendarWeek.add(btnGoal);
+		pnlCalendarWeek.add(btnTask);
+		pnlCalendarWeek.setBounds(100, 100, 700, 610);
 
-
-		pnlCalendarMonth.setBounds(100, 100, 700, 610);
+		pnlCalendarWeek.setBounds(100, 100, 700, 610);
 		lblYear.setBounds(10, 335, 110, 525);
 		cmbYear.setBounds(97, 335, 90, 525);
 		btnPrev.setBounds(10, 45, 90, 25);
 		btnNext.setBounds(620, 45, 66, 25);
 		btnGoal.setBounds(420, 10, 100, 25);
 		btnTask.setBounds(540, 10, 100, 25);
-		mstblCalendar.setBounds(10, 70, 680, 500);
+		wstblCalendar.setBounds(10, 70, 680, 500);
 
 		frmMain.setResizable(false);
 		frmMain.setVisible(true);
 
 		GregorianCalendar cal = new GregorianCalendar();
 		realDay = cal.get(GregorianCalendar.DAY_OF_MONTH);
+		realWeek = cal.get(GregorianCalendar.WEEK_OF_MONTH);
 		realMonth = cal.get(GregorianCalendar.MONTH);
 		realYear = cal.get(GregorianCalendar.YEAR);
 		currentMonth = realMonth;
 		currentYear = realYear;
 
-		String[] headers = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+		String[] headers = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 		for (int i = 0; i < 7; i++) {
-			mtblCalendar.addColumn(headers[i]);
+			wtblCalendar.addColumn(headers[i]);
 		}
 
-		mnthTblCalendar.getParent().setBackground(mnthTblCalendar.getBackground());
-		mnthTblCalendar.setGridColor(Color.BLACK);
+		weekTblCalendar.getParent().setBackground(weekTblCalendar.getBackground());
+		weekTblCalendar.setGridColor(Color.BLACK);
 
-		mnthTblCalendar.getTableHeader().setResizingAllowed(false);
-		mnthTblCalendar.getTableHeader().setReorderingAllowed(false);
+		weekTblCalendar.getTableHeader().setResizingAllowed(false);
+		weekTblCalendar.getTableHeader().setReorderingAllowed(false);
 
-		mnthTblCalendar.setColumnSelectionAllowed(true);
-		mnthTblCalendar.setRowSelectionAllowed(true);
-		mnthTblCalendar.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		weekTblCalendar.setColumnSelectionAllowed(true);
+		// weekTblCalendar.setRowSelectionAllowed(true);
+		weekTblCalendar.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		mnthTblCalendar.setRowHeight(90);
-		mtblCalendar.setColumnCount(7);
-		mtblCalendar.setRowCount(6);
+		 weekTblCalendar.setRowHeight(500);
+		wtblCalendar.setColumnCount(7);
+		 wtblCalendar.setRowCount(1);
 
 		for (int i = realYear - 100; i <= realYear + 100; i++) {
 			cmbYear.addItem(String.valueOf(i));
 		}
 
-		refreshCalendar(realMonth, realYear);
+		refreshCalendar(realWeek, realMonth, realYear );
 	}
 
-	public static void refreshCalendar(int month, int year) {
+	public static void refreshCalendar(int week, int month, int year) {
 		String[] months = { "January", "February", "March", "April", "May", "June", "July", "August", "September",
 				"October", "November", "December" };
-		int nod, som;
-
+		int som, nod;
+		System.out.println(week +","+ month);
 		btnPrev.setEnabled(true);
 		btnNext.setEnabled(true);
 		if (month == 0 && year <= realYear - 10) {
@@ -151,23 +153,27 @@ public class GoalTracker {
 		lblMonth.setBounds(345 - lblMonth.getPreferredSize().width / 2, 45, 180, 25);
 		cmbYear.setSelectedItem(String.valueOf(year));
 
-		for (int i = 0; i < 6; i++) {
+//		for (int i = 0; i < 6; i++) {
+//			wtblCalendar.setValueAt(null, 0, i);
+//		}
+		
+		for (int i = 0; i < 1; i++) {
 			for (int j = 0; j < 7; j++) {
-				mtblCalendar.setValueAt(null, i, j);
+				wtblCalendar.setValueAt(null, 0, j);
 			}
 		}
 
-		GregorianCalendar cal = new GregorianCalendar(year, month, 1);
-		nod = cal.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
+		GregorianCalendar cal = new GregorianCalendar(year, month, week, 0,0);
+		 nod = cal.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
 		som = cal.get(GregorianCalendar.DAY_OF_WEEK);
 
-		for (int i = 1; i <= nod; i++) {
-			int row = new Integer((i + som - 2) / 7);
+		for (int i = 1; i <= som; i++) {
+			 int row = new Integer((i + som - 2) / 7);
 			int column = (i + som - 2) % 7;
-			mtblCalendar.setValueAt(i, row, column);
+			wtblCalendar.setValueAt(i, row, column);
 		}
 
-		mnthTblCalendar.setDefaultRenderer(mnthTblCalendar.getColumnClass(0), new tblCalendarRenderer());
+		weekTblCalendar.setDefaultRenderer(weekTblCalendar.getColumnClass(0), new tblCalendarRenderer());
 	}
 
 	static class tblCalendarRenderer extends DefaultTableCellRenderer {
@@ -199,7 +205,7 @@ public class GoalTracker {
 			} else {
 				currentMonth -= 1;
 			}
-			refreshCalendar(currentMonth, currentYear);
+//			refreshCalendar(currentMonth, currentYear);
 		}
 	}
 
@@ -211,7 +217,7 @@ public class GoalTracker {
 			} else {
 				currentMonth += 1;
 			}
-			refreshCalendar(currentMonth, currentYear);
+//			refreshCalendar(currentMonth, currentYear);
 		}
 	}
 
@@ -220,7 +226,7 @@ public class GoalTracker {
 			if (cmbYear.getSelectedItem() != null) {
 				String b = cmbYear.getSelectedItem().toString();
 				currentYear = Integer.parseInt(b);
-				refreshCalendar(currentMonth, currentYear);
+//				refreshCalendar(currentMonth, currentYear);
 			}
 		}
 	}
