@@ -3,6 +3,9 @@ package main;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
+
+import main.GoalTracker.tblCalendarRenderer;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -17,7 +20,7 @@ public class GoalTrackerWeek {
 	static DefaultTableModel mtblCalendar, wtblCalendar;
 	static JScrollPane wstblCalendar;
 	static JPanel pnlTask, pnlCalendarWeek;
-	static int realYear, realMonth, realWeek, realDay, currentYear, currentMonth;
+	static int realYear, realMonth, realWeek, realDay, currentWeek, currentYear, currentMonth;
 	static JTabbedPane tabs;
 
 	public static void main(String args[]) {
@@ -104,9 +107,11 @@ public class GoalTrackerWeek {
 
 		GregorianCalendar cal = new GregorianCalendar();
 		realDay = cal.get(GregorianCalendar.DAY_OF_MONTH);
-		realWeek = cal.get(GregorianCalendar.WEEK_OF_MONTH);
+		realWeek = cal.get(GregorianCalendar.WEEK_OF_YEAR);
 		realMonth = cal.get(GregorianCalendar.MONTH);
 		realYear = cal.get(GregorianCalendar.YEAR);
+		currentMonth = realMonth;
+		currentYear = realYear;
 		currentMonth = realMonth;
 		currentYear = realYear;
 
@@ -125,22 +130,21 @@ public class GoalTrackerWeek {
 		// weekTblCalendar.setRowSelectionAllowed(true);
 		weekTblCalendar.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		 weekTblCalendar.setRowHeight(500);
+		weekTblCalendar.setRowHeight(500);
 		wtblCalendar.setColumnCount(7);
-		 wtblCalendar.setRowCount(1);
+		wtblCalendar.setRowCount(1);
 
 		for (int i = realYear - 100; i <= realYear + 100; i++) {
 			cmbYear.addItem(String.valueOf(i));
 		}
 
-		refreshCalendar(realWeek, realMonth, realYear );
+		refreshCalendar(realWeek, realMonth, realYear);
 	}
 
 	public static void refreshCalendar(int week, int month, int year) {
 		String[] months = { "January", "February", "March", "April", "May", "June", "July", "August", "September",
 				"October", "November", "December" };
 		int som, nod;
-		System.out.println(week +","+ month);
 		btnPrev.setEnabled(true);
 		btnNext.setEnabled(true);
 		if (month == 0 && year <= realYear - 10) {
@@ -153,24 +157,25 @@ public class GoalTrackerWeek {
 		lblMonth.setBounds(345 - lblMonth.getPreferredSize().width / 2, 45, 180, 25);
 		cmbYear.setSelectedItem(String.valueOf(year));
 
-//		for (int i = 0; i < 6; i++) {
-//			wtblCalendar.setValueAt(null, 0, i);
-//		}
-		
 		for (int i = 0; i < 1; i++) {
 			for (int j = 0; j < 7; j++) {
-				wtblCalendar.setValueAt(null, 0, j);
+				wtblCalendar.setValueAt(null, i, j);
 			}
 		}
 
-		GregorianCalendar cal = new GregorianCalendar(year, month, week, 0,0);
-		 nod = cal.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
+		GregorianCalendar cal = new GregorianCalendar(year, month, 0);
+		nod = cal.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
 		som = cal.get(GregorianCalendar.DAY_OF_WEEK);
 
-		for (int i = 1; i <= som; i++) {
-			 int row = new Integer((i + som - 2) / 7);
-			int column = (i + som - 2) % 7;
-			wtblCalendar.setValueAt(i, row, column);
+		System.out.println(nod + "," + som);
+		for (int i = 1; i <= 7; i++) {
+			int k = new Integer((i + som - 2) / 7);
+			if (k != 1) {
+				int row = k;
+				int column = (i + som - 2) % 7;
+				System.out.println(row + "," + column);
+				wtblCalendar.setValueAt(i, row, column);
+			}
 		}
 
 		weekTblCalendar.setDefaultRenderer(weekTblCalendar.getColumnClass(0), new tblCalendarRenderer());
@@ -199,25 +204,25 @@ public class GoalTrackerWeek {
 
 	static class btnPrev_Action implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (currentMonth == 0) {
-				currentMonth = 11;
+			if (currentWeek == 0) {
+				currentWeek = 53;
 				currentYear -= 1;
 			} else {
-				currentMonth -= 1;
+				currentWeek -= 1;
 			}
-//			refreshCalendar(currentMonth, currentYear);
+			refreshCalendar(currentWeek, currentMonth, currentYear);
 		}
 	}
 
 	static class btnNext_Action implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (currentMonth == 11) {
-				currentMonth = 0;
+			if (currentWeek == 53) {
+				currentWeek = 0;
 				currentYear += 1;
 			} else {
-				currentMonth += 1;
+				currentWeek += 1;
 			}
-//			refreshCalendar(currentMonth, currentYear);
+			refreshCalendar(currentWeek, currentMonth, currentYear);
 		}
 	}
 
@@ -226,7 +231,7 @@ public class GoalTrackerWeek {
 			if (cmbYear.getSelectedItem() != null) {
 				String b = cmbYear.getSelectedItem().toString();
 				currentYear = Integer.parseInt(b);
-//				refreshCalendar(currentMonth, currentYear);
+				// refreshCalendar(currentMonth, currentYear);
 			}
 		}
 	}
