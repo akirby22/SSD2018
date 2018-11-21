@@ -151,6 +151,7 @@ public class TaskUI implements ActionListener {
 								+ "0" + "\t" + "0" + task.getGoalDescription() + "\t" + task.getGoalID() + "\n");
 						System.out.println("task updated");
 						br.close();
+						frmTask.dispose();
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}

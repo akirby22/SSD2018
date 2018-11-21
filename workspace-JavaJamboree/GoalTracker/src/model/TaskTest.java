@@ -8,7 +8,6 @@ public class TaskTest {
 	
 	public static void main(String[] args) {
 		
-		makeArray();
 		String s1 = "GOOD title";
 		String s2 = "GOOD decription";
 		int sD = 1;
@@ -31,14 +30,39 @@ public class TaskTest {
 	//************************************END OF MAIN************************************************************
 	
 	private static int idCount;
-	private static ArrayList<Task> allTasks = new ArrayList<Task>();
+	private static ArrayList<Task> allTasks = new ArrayList<Task>(); //this is the .csv file
+	private static Map<Integer, Object> all = new HashMap<>(365); //this is what will sort into days
+	//private static Map<Object, ArrayList<Object>> multiMap = new HashMap<>();
 	
-	public static void makeArray() {
+	/*private static void fillHash() {
+		ArrayList<Task> d0 = new ArrayList<Task>();
+		all.put(0, d0);
+		ArrayList<Task> d1 = new ArrayList<Task>();
+		all.put(0, d1);
+		ArrayList<Task> d2 = new ArrayList<Task>();
+		all.put(0, d2);
+		ArrayList<Task> d3 = new ArrayList<Task>();
+		all.put(0, d3);
+		ArrayList<Task> d4 = new ArrayList<Task>();
+		all.put(0, d4);
+		ArrayList<Task> d5 = new ArrayList<Task>();
+		all.put(0, d5);
+		ArrayList<Task> d6 = new ArrayList<Task>();
+		all.put(0, d6);
+		ArrayList<Task> d7 = new ArrayList<Task>();
+		all.put(0, d7);
+		ArrayList<Task> d8 = new ArrayList<Task>();
+		all.put(0, d8);
+		ArrayList<Task> d9 = new ArrayList<Task>();
+		all.put(0, d9);
+	}*/
+	
+	/*public static void makeArray() { //this is what will sort into days
 		int count = 0;
 		Map<Integer, ArrayList<Task>> all = new HashMap<>(365);
 		count++;
 		all.put(count, null);
-	}
+	}*/
 	
 	public static int getIDCount() {
 		int temp = idCount;
@@ -60,4 +84,13 @@ public class TaskTest {
 		System.out.println("");
 		System.out.println("Array Size: " + allTasks.size());
 	}
+	
+	/*public static void putIntoHash() {
+		Integer index = 0;
+		for(int i = 0; i < allTasks.size(); i++) {
+			index = allTasks.get(i).getStartDate();
+			all.put(index, allTasks.get(i));
+			System.out.println(all.get(index));
+		}
+	}*/
 }
