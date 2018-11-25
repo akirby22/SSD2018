@@ -190,6 +190,29 @@ public class TaskUI implements ActionListener {
 
 				}
 			});
+			
+			btnDelete.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					FileWriter fileWriter;
+					try {
+						fileWriter = new FileWriter("src/tasks.csv", true);
+						BufferedWriter br = new BufferedWriter(fileWriter);
+						for(int i = 0; i < allTasks.size(); i++) {
+							Task task = allTasks.get(i);
+							br.write(task.getTitle() + "\t" + task.getDescription() + "\t" + task.getStartDate() + "\t"
+									+ task.getEndDate() + "\t" + task.getUrgent() + "\t" + task.getImportant() + "\t"
+									+ task.getID() + "\t" + task.getTaskNum() + task.getGoalDescription() + "\t" + task.getGoalID() + "\n");
+						}
+						System.out.println("task updated");
+						br.close();
+						frmTask.dispose();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+
+				}
+			});
 
 			frmTask.setResizable(false);
 			frmTask.setVisible(true);
@@ -218,7 +241,33 @@ public class TaskUI implements ActionListener {
 	
 	public static int convertDate(int Month, int Day, int Year) {//converts dates fields into an int
 		GregorianCalendar gc = new GregorianCalendar();
-		gc.set(GregorianCalendar.MONTH, Month);
+        switch (Month) {
+            case 1:  gc.set(GregorianCalendar.MONTH, GregorianCalendar.JANUARY);;
+                     break;
+            case 2:  gc.set(GregorianCalendar.MONTH, GregorianCalendar.FEBRUARY);
+                     break;
+            case 3:  gc.set(GregorianCalendar.MONTH, GregorianCalendar.MARCH);
+                     break;
+            case 4:  gc.set(GregorianCalendar.MONTH, GregorianCalendar.APRIL);
+                     break;
+            case 5:  gc.set(GregorianCalendar.MONTH, GregorianCalendar.MAY);
+                     break;
+            case 6:  gc.set(GregorianCalendar.MONTH, GregorianCalendar.JUNE);
+                     break;
+            case 7:  gc.set(GregorianCalendar.MONTH, GregorianCalendar.JULY);
+                     break;
+            case 8:  gc.set(GregorianCalendar.MONTH, GregorianCalendar.AUGUST);
+                     break;
+            case 9:  gc.set(GregorianCalendar.MONTH, GregorianCalendar.SEPTEMBER);
+                     break;
+            case 10: gc.set(GregorianCalendar.MONTH, GregorianCalendar.OCTOBER);
+                     break;
+            case 11: gc.set(GregorianCalendar.MONTH, GregorianCalendar.NOVEMBER);
+                     break;
+            case 12: gc.set(GregorianCalendar.MONTH, GregorianCalendar.DECEMBER);
+                     break;
+            default: break;
+        }
 		gc.set(GregorianCalendar.DAY_OF_MONTH, Day);
 	    gc.set(GregorianCalendar.YEAR, Year);
 	    
