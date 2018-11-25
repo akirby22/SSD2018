@@ -181,7 +181,7 @@ public class TaskUI implements ActionListener {
 									+ task.getEndDate() + "\t" + task.getUrgent() + "\t" + task.getImportant() + "\t"
 									+ task.getID() + "\t" + task.getTaskNum() + task.getGoalDescription() + "\t" + task.getGoalID() + "\n");
 						}
-						System.out.println("task updated");
+						System.out.println("task added");
 						br.close();
 						frmTask.dispose();
 					} catch (IOException e1) {
@@ -194,9 +194,10 @@ public class TaskUI implements ActionListener {
 			btnDelete.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					//Enter code here to send task to deleteTasks(Task task)
 					FileWriter fileWriter;
 					try {
-						fileWriter = new FileWriter("src/tasks.csv", true);
+						fileWriter = new FileWriter("src/tasks.csv");
 						BufferedWriter br = new BufferedWriter(fileWriter);
 						for(int i = 0; i < allTasks.size(); i++) {
 							Task task = allTasks.get(i);
@@ -204,7 +205,7 @@ public class TaskUI implements ActionListener {
 									+ task.getEndDate() + "\t" + task.getUrgent() + "\t" + task.getImportant() + "\t"
 									+ task.getID() + "\t" + task.getTaskNum() + task.getGoalDescription() + "\t" + task.getGoalID() + "\n");
 						}
-						System.out.println("task updated");
+						System.out.println("task deleted");
 						br.close();
 						frmTask.dispose();
 					} catch (IOException e1) {
