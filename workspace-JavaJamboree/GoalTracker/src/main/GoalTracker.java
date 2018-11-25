@@ -165,6 +165,7 @@ public class GoalTracker {
 			int row = new Integer((i + som - 2) / 7);
 			int column = (i + som - 2) % 7;
 			mtblCalendar.setValueAt(i, row, column);
+			//insert print/button stuff here
 		}
 
 		mnthTblCalendar.setDefaultRenderer(mnthTblCalendar.getColumnClass(0), new tblCalendarRenderer());
