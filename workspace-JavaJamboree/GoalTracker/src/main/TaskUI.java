@@ -32,7 +32,7 @@ public class TaskUI implements ActionListener {
 	static Container paneTask;
 	static JPanel pnlTask;
 	static JButton btnSave, btnDelete, btnCancel;
-	JLabel l1, l2, l3, l4, l5, l6;
+	JLabel l1, l2, l3, l4, l5, l6, l7;
 	ButtonGroup impgroup = new ButtonGroup();
 	ButtonGroup prioritygroup = new ButtonGroup();
 	JRadioButton r1, r2, r3, r4;
@@ -42,7 +42,7 @@ public class TaskUI implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		frmTask = new JFrame("Task");
-		JTextField t1, t2;
+		JTextField t1, t2, t3, t4, t5, t6, t7, t8;
 		frmTask.setSize(600, 600);
 		paneTask = frmTask.getContentPane();
 		paneTask.setLayout(null);
@@ -65,16 +65,20 @@ public class TaskUI implements ActionListener {
 			l3.setBounds(50, 125, 100, 30);
 			l4 = new JLabel("Is urgent");
 			l4.setBounds(50, 145, 100, 30);
-			l5 = new JLabel("Date Range");
+			l5 = new JLabel("Start Date");
 			l5.setBounds(50, 175, 100, 30);
-			l6 = new JLabel("Choose Goal");
-			l6.setBounds(50, 40, 100, 30);
+			l7 = new JLabel("Choose Goal");
+			l7.setBounds(50, 40, 100, 30);
+
+			l6 = new JLabel("End date");
+			l6.setBounds(50, 210, 100, 30);
 			pnlTask.add(l1);
 			pnlTask.add(l2);
 			pnlTask.add(l3);
 			pnlTask.add(l4);
 			pnlTask.add(l5);
 			pnlTask.add(l6);
+			pnlTask.add(l7);
 
 			c = new JComboBox<String>();
 			c.setBounds(150, 40, 200, 30);
@@ -110,19 +114,33 @@ public class TaskUI implements ActionListener {
 			pnlTask.add(r3);
 			pnlTask.add(r4);
 
-			JFormattedTextField startDateTextField = new JFormattedTextField(format);
-			startDateTextField.setBounds(150, 175, 70, 30);
-			JFormattedTextField endDateTextField = new JFormattedTextField(format);
-			endDateTextField.setBounds(260, 175, 70, 30);
-			pnlTask.add(startDateTextField);
-			pnlTask.add(endDateTextField);
+			t3 = new JTextField();
+			t3.setBounds(150, 175, 35, 30);
+			t4 = new JTextField();
+			t4.setBounds(180, 175, 35, 30);
+			t5 = new JTextField();
+			t5.setBounds(210, 175, 50, 30);
+
+			pnlTask.add(t3);
+			pnlTask.add(t4);
+			pnlTask.add(t5);
+
+			t6 = new JTextField();
+			t6.setBounds(150, 210, 35, 30);
+			t7 = new JTextField();
+			t7.setBounds(180, 210, 35, 30);
+			t8 = new JTextField();
+			t8.setBounds(210, 210, 50, 30);
+			pnlTask.add(t6);
+			pnlTask.add(t7);
+			pnlTask.add(t8);
 
 			btnSave = new JButton("Save");
 			btnDelete = new JButton("Delete");
 			btnCancel = new JButton("Cancel");
-			btnSave.setBounds(50, 215, 66, 25);
-			btnDelete.setBounds(150, 215, 66, 25);
-			btnCancel.setBounds(250, 215, 66, 25);
+			btnSave.setBounds(50, 250, 66, 25);
+			btnDelete.setBounds(150, 250, 66, 25);
+			btnCancel.setBounds(250, 250, 66, 25);
 			pnlTask.add(btnSave);
 			pnlTask.add(btnDelete);
 			pnlTask.add(btnCancel);
