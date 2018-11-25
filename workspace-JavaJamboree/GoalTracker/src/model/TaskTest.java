@@ -19,12 +19,12 @@ public class TaskTest {
 		int goalID = 1;
 		
 		Task task1 = new Task(s1, s2, sD, eD, urg, imp, getIDCount(), firstTask, s3, goalID);
-		createTasks(task1);
+		addTasks(task1);
 		getSize();
 		
 		System.out.println("");
 		Task task2 = new Task(s1, s2, sD, eD + 4, urg, imp, getIDCount(), firstTask, s3, goalID);
-		createTasks(task2);
+		addTasks(task2);
 		getSize();
 		deleteTasks(task2);
 		getSize();
@@ -40,13 +40,13 @@ public class TaskTest {
 		return temp;
 	}
 	
-	public static void createTasks(Task task) {
+	public static void addTasks(Task task) {
 		allTasks.add(task);
 		
 		if(task.getNumDays() != 0) { //not last day
 			Task temp = new Task(task.getTitle(), task.getDescription(), task.getStartDate() + 1, 
 					task.getEndDate(), task.getUrgent(), task.getImportant(), task.getID(), task.getTaskNum() + 1, task.getGoalDescription(), task.getGoalID());
-			createTasks(temp);
+			addTasks(temp);
 		}
 	}
 	
