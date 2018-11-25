@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -157,16 +158,29 @@ public class TaskUI implements ActionListener {
 			btnSave.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					Task task;
-					task = new Task(t1.getText(), t2.getText(), 0, 0, r1.isSelected(), r3.isSelected(), 0, 0,
+					addTasks(t1.getText(), t2.getText(), Integer.parseInt(t3.getText()), Integer.parseInt(t4.getText()), Integer.parseInt(t5.getText()), Integer.parseInt(t6.getText()), Integer.parseInt(t7.getText()), Integer.parseInt(t8.getText()), r1.isSelected(), r3.isSelected(), getIDCount(), 1,
 							"tempgoaldesc", 0);
+					/*Task task;
+					task = new Task(t1.getText(), t2.getText(), 0, 0, r1.isSelected(), r3.isSelected(), 0, 0,
+							"tempgoaldesc", 0);*/
 					FileWriter fileWriter;
 					try {
-						fileWriter = new FileWriter("src/tasks.csv", true);
+						/*fileWriter = new FileWriter("src/tasks.csv", true);
 						BufferedWriter br = new BufferedWriter(fileWriter);
 						br.write(task.getTitle() + "\t" + task.getDescription() + "\t" + task.getStartDate() + "\t"
 								+ task.getEndDate() + "\t" + task.getImportant() + "\t" + task.getPriority() + "\t"
 								+ "0" + "\t" + "0" + task.getGoalDescription() + "\t" + task.getGoalID() + "\n");
+						System.out.println("task updated");
+						br.close();
+						frmTask.dispose();*/
+						fileWriter = new FileWriter("src/tasks.csv", true);
+						BufferedWriter br = new BufferedWriter(fileWriter);
+						for(int i = 0; i < allTasks.size(); i++) {
+							Task task = allTasks.get(i);
+							br.write(task.getTitle() + "\t" + task.getDescription() + "\t" + task.getStartDate() + "\t"
+									+ task.getEndDate() + "\t" + task.getUrgent() + "\t" + task.getImportant() + "\t"
+									+ task.getID() + "\t" + task.getTaskNum() + task.getGoalDescription() + "\t" + task.getGoalID() + "\n");
+						}
 						System.out.println("task updated");
 						br.close();
 						frmTask.dispose();
@@ -185,6 +199,70 @@ public class TaskUI implements ActionListener {
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
+		}
+	}
+	
+	private static int idCount;
+	private static ArrayList<Task> allTasks = new ArrayList<Task>(); //the .csv file loads to and saves from this
+	
+	public static int getIDCount() {
+		int temp = idCount;
+		idCount++;
+		return temp;
+	}
+	
+	public static void addTasks(String titl, String desc, int sMonth, int sDay, int sYear, int eMonth, int eDay, int eYear, boolean urg, boolean imp, int id, int fT, String goalDesc, int gID) {
+		Task temp = new Task(titl, desc, convertDate(sMonth, sDay, sYear), convertDate(eMonth, eDay, eYear), urg, imp, id, fT, goalDesc, gID);
+		createTasks(temp);
+	}
+	
+	public static int convertDate(int Month, int Day, int Year) {//converts dates fields into an int
+		GregorianCalendar gc = new GregorianCalendar();
+		gc.set(GregorianCalendar.MONTH, Month);
+		gc.set(GregorianCalendar.DAY_OF_MONTH, Day);
+	    gc.set(GregorianCalendar.YEAR, Year);
+	    
+	    return gc.get(GregorianCalendar.DAY_OF_YEAR);
+	}
+	
+	public static void createTasks(Task task) {
+		allTasks.add(task);
+		
+		if(task.getNumDays() != 0) { //not last day
+			Task temp = new Task(task.getTitle(), task.getDescription(), task.getStartDate() + 1, 
+					task.getEndDate(), task.getUrgent(), task.getImportant(), task.getID(), task.getTaskNum() + 1, task.getGoalDescription(), task.getGoalID());
+			createTasks(temp);
+		}
+	}
+	
+	public static void deleteTasks(Task task) {//takes the task to be deleted and deletes all instances of that task
+		int taskID = task.getID();
+		for(int i = allTasks.size() - 1; i >= 0; i--) { //starts at end and goes towards 0
+			if(allTasks.get(i).getID() == taskID) {
+				allTasks.remove(i);
+			}
+		}
+	}
+	
+	public static void updateTask(Task oldTask, Task newTask) { //takes old task and new task, deletes old task, adds new task
+		deleteTasks(oldTask);
+		//addTasks(newTask);
+	}
+	
+	public static void printTasks() { //today = 0
+		for(int i = 1; i < 10; i++) {//for each day (only 10 here)
+			System.out.println("Day " + i);
+			for(int j = 1; j < 5; j++) {//for each priority
+				System.out.println("Priority " + j);
+				for(int k = 0; k < allTasks.size(); k++) {//go through each task in allTasks
+					Task temp = allTasks.get(k);
+					if(temp.getStartDate() == i && temp.getPriority() == j) {
+						System.out.println(temp.getTitle());
+					}
+				}
+				System.out.println("");
+			}
+			System.out.println("----------------------------");
 		}
 	}
 }

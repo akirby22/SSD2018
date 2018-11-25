@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.GregorianCalendar;
 
 public class TaskTest {
 	
@@ -18,7 +19,7 @@ public class TaskTest {
 		String s3 = "GOOD GOAL";
 		int goalID = 1;
 		
-		Task task1 = new Task("Task 1", s2, 1, 3, urg, imp, getIDCount(), firstTask, s3, goalID);
+		/*Task task1 = new Task("Task 1", s2, 1, 3, urg, imp, getIDCount(), firstTask, s3, goalID);
 		addTasks(task1);
 		//getSize();
 		
@@ -36,7 +37,7 @@ public class TaskTest {
 		
 		Task task5 = new Task("task 5", s2, 2, 9, urg, imp, getIDCount(), firstTask, s3, goalID);
 		addTasks(task5);
-		//getSize();
+		//getSize();*/
 		
 		printTasks();
 
@@ -52,13 +53,27 @@ public class TaskTest {
 		return temp;
 	}
 	
-	public static void addTasks(Task task) {
+	public static void addTasks(String titl, String desc, int sMonth, int sDay, int sYear, int eMonth, int eDay, int eYear, boolean urg, boolean imp, int id, int fT, String goalDesc, int gID) {
+		Task temp = new Task(titl, desc, convertDate(sMonth, sDay, sYear), convertDate(eMonth, eDay, eYear), urg, imp, id, fT, goalDesc, gID);
+		createTasks(temp);
+	}
+	
+	public static int convertDate(int Month, int Day, int Year) {//converts dates fields into an int
+		GregorianCalendar gc = new GregorianCalendar();
+		gc.set(GregorianCalendar.MONTH, Month);
+		gc.set(GregorianCalendar.DAY_OF_MONTH, Day);
+	    gc.set(GregorianCalendar.YEAR, Year);
+	    
+	    return gc.get(GregorianCalendar.DAY_OF_YEAR);
+	}
+	
+	public static void createTasks(Task task) {
 		allTasks.add(task);
 		
 		if(task.getNumDays() != 0) { //not last day
 			Task temp = new Task(task.getTitle(), task.getDescription(), task.getStartDate() + 1, 
 					task.getEndDate(), task.getUrgent(), task.getImportant(), task.getID(), task.getTaskNum() + 1, task.getGoalDescription(), task.getGoalID());
-			addTasks(temp);
+			createTasks(temp);
 		}
 	}
 	
@@ -73,11 +88,11 @@ public class TaskTest {
 	
 	public static void updateTask(Task oldTask, Task newTask) { //takes old task and new task, deletes old task, adds new task
 		deleteTasks(oldTask);
-		addTasks(newTask);
+		//addTasks(newTask);
 	}
 	
 	public static void printTasks() { //today = 0
-		for(int i = 0; i < 10; i++) {//for each day (only 10 here)
+		for(int i = 1; i < 10; i++) {//for each day (only 10 here)
 			System.out.println("Day " + i);
 			for(int j = 1; j < 5; j++) {//for each priority
 				System.out.println("Priority " + j);

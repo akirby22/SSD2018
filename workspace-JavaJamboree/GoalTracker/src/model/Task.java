@@ -27,8 +27,7 @@ public class Task {
 	public Task(String titl, String desc, int sDate, int eDate, boolean urg, boolean imp, int id, int fT, String goalDesc, int gID) {
 		setTitle(titl);
 		setDescription(desc);
-		//setStartDate(sDate);
-		//setEndDate(eDate);
+
 		setStartDate(sDate);
 		setEndDate(eDate);
 		setUrgent(urg);
