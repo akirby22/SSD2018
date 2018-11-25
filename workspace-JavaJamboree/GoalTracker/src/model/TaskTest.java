@@ -18,20 +18,28 @@ public class TaskTest {
 		String s3 = "GOOD GOAL";
 		int goalID = 1;
 		
-		Task task1 = new Task(s1, s2, sD, eD, urg, imp, getIDCount(), firstTask, s3, goalID);
+		Task task1 = new Task("Task 1", s2, 1, 3, urg, imp, getIDCount(), firstTask, s3, goalID);
 		addTasks(task1);
-		getSize();
+		//getSize();
 		
-		System.out.println("");
-		Task task2 = new Task(s1, s2, sD, eD + 4, urg, imp, getIDCount(), firstTask, s3, goalID);
+		Task task2 = new Task("Task 2", s2, 1, 7, true, true, getIDCount(), firstTask, s3, goalID);
 		addTasks(task2);
-		getSize();
-		deleteTasks(task2);
-		getSize();
+		//getSize();
 		
-		String s4 = "BETTER title";
-		Task task1Again = new Task(s4, s2, sD, eD, urg, imp, getIDCount(), firstTask, s3, goalID);
-		updateTask(task1, task1Again);
+		Task task3 = new Task("Task 3", s2, 3, 5, false, true, getIDCount(), firstTask, s3, goalID);
+		addTasks(task3);
+		//getSize();
+		
+		Task task4 = new Task("Task 4", s2, 4, 8, false, false, getIDCount(), firstTask, s3, goalID);
+		addTasks(task4);
+		//getSize();
+		
+		Task task5 = new Task("task 5", s2, 2, 9, urg, imp, getIDCount(), firstTask, s3, goalID);
+		addTasks(task5);
+		//getSize();
+		
+		printTasks();
+
 	}
 	//************************************END OF MAIN************************************************************
 	
@@ -68,6 +76,23 @@ public class TaskTest {
 		addTasks(newTask);
 	}
 	
+	public static void printTasks() { //today = 0
+		for(int i = 0; i < 10; i++) {//for each day (only 10 here)
+			System.out.println("Day " + i);
+			for(int j = 1; j < 5; j++) {//for each priority
+				System.out.println("Priority " + j);
+				for(int k = 0; k < allTasks.size(); k++) {//go through each task in allTasks
+					Task temp = allTasks.get(k);
+					if(temp.getStartDate() == i && temp.getPriority() == j) {
+						System.out.println(temp.getTitle());
+					}
+				}
+				System.out.println("");
+			}
+			System.out.println("----------------------------");
+		}
+	}
+	
 	public static void getSize() { // just for testing purposes
 		System.out.println("");
 		System.out.println("Array Size: " + allTasks.size());
@@ -76,44 +101,4 @@ public class TaskTest {
 		}*/
 	}
 	
-	/*public static void putIntoHash() {
-		Integer index = 0;
-		for(int i = 0; i < allTasks.size(); i++) {
-			index = allTasks.get(i).getStartDate();
-			all.put(index, allTasks.get(i));
-			System.out.println(all.get(index));
-		}
-	}*/
-	//private static Map<Integer, Object> all = new HashMap<>(365); //this is what will sort into days
-	//private static Map<Object, ArrayList<Object>> multiMap = new HashMap<>();
-	
-	/*private static void fillHash() {
-		ArrayList<Task> d0 = new ArrayList<Task>();
-		all.put(0, d0);
-		ArrayList<Task> d1 = new ArrayList<Task>();
-		all.put(0, d1);
-		ArrayList<Task> d2 = new ArrayList<Task>();
-		all.put(0, d2);
-		ArrayList<Task> d3 = new ArrayList<Task>();
-		all.put(0, d3);
-		ArrayList<Task> d4 = new ArrayList<Task>();
-		all.put(0, d4);
-		ArrayList<Task> d5 = new ArrayList<Task>();
-		all.put(0, d5);
-		ArrayList<Task> d6 = new ArrayList<Task>();
-		all.put(0, d6);
-		ArrayList<Task> d7 = new ArrayList<Task>();
-		all.put(0, d7);
-		ArrayList<Task> d8 = new ArrayList<Task>();
-		all.put(0, d8);
-		ArrayList<Task> d9 = new ArrayList<Task>();
-		all.put(0, d9);
-	}*/
-	
-	/*public static void makeArray() { //this is what will sort into days
-		int count = 0;
-		Map<Integer, ArrayList<Task>> all = new HashMap<>(365);
-		count++;
-		all.put(count, null);
-	}*/
 }

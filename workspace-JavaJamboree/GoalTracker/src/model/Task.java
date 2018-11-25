@@ -12,8 +12,6 @@ public class Task {
 	
 	private String title;
 	private String description;
-	//private LocalDate startDate;
-	//private LocalDate endDate;
 	private int startDate;
 	private int endDate;
 	private boolean urgent;
@@ -43,19 +41,19 @@ public class Task {
 		setNumDays(sDate, eDate);
 		setPriority(urg, imp);
 		
-		System.out.println(title);
+		/*System.out.println(title);
 		//System.out.println(description);
-		//System.out.println("StartDate is " + startDate);
-		//System.out.println("EndDate is " + endDate);
-		//System.out.println("Urgent is " + urgent);
-		//System.out.println("Important is " + important);
+		System.out.println("StartDate is " + startDate);
+		System.out.println("EndDate is " + endDate);
+		System.out.println("Urgent is " + urgent);
+		System.out.println("Important is " + important);
 		System.out.println("ID is " + ID);
 		System.out.println("NumDays is " + numDays);
-		//System.out.println("Priority is " + priority);
+		System.out.println("Priority is " + priority);
 		System.out.println("Task num is " + taskNum);
 		//System.out.println(goalDescription);
 		//System.out.println("Goal ID is " + goalID);
-		System.out.println("");
+		System.out.println("");*/
 	}
 	
 	private void setTitle(String titl) {
@@ -74,30 +72,18 @@ public class Task {
 		return description;
 	}
 	
-	/*private void setStartDate(LocalDate sDate) {
-		startDate = sDate;
-	}*/
 	private void setStartDate(int sDate) {
 		startDate = sDate;
 	}
 	
-	/*public LocalDate getStartDate() {
-		return startDate;
-	}*/
 	public int getStartDate() {
 		return startDate;
 	}
 	
-	/*private void setEndDate(LocalDate eDate) {
-		endDate = eDate;
-	}*/
 	private void setEndDate(int eDate) {
 		endDate = eDate;
 	}
 	
-	/*public LocalDate getEndDate() {
-		return endDate;
-	}*/
 	public int getEndDate(){
 		return endDate;
 	}
@@ -150,9 +136,6 @@ public class Task {
 		return goalID;
 	}
 	
-	/*private void setNumDays(LocalDate sDate, LocalDate eDate) {
-		numDays = Days.daysBetween(sDate, eDate).getDays();
-	}*/
 	private void setNumDays(int sDate, int eDate) {
 		numDays = eDate - sDate;
 	}
