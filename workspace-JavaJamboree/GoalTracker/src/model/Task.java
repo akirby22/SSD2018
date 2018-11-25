@@ -43,10 +43,10 @@ public class Task {
 		setNumDays(sDate, eDate);
 		setPriority(urg, imp);
 		
-		/*//System.out.println(title);
+		System.out.println(title);
 		//System.out.println(description);
-		System.out.println("StartDate is " + startDate);
-		System.out.println("EndDate is " + endDate);
+		//System.out.println("StartDate is " + startDate);
+		//System.out.println("EndDate is " + endDate);
 		//System.out.println("Urgent is " + urgent);
 		//System.out.println("Important is " + important);
 		System.out.println("ID is " + ID);
@@ -55,7 +55,7 @@ public class Task {
 		System.out.println("Task num is " + taskNum);
 		//System.out.println(goalDescription);
 		//System.out.println("Goal ID is " + goalID);
-		System.out.println("");*/
+		System.out.println("");
 	}
 	
 	private void setTitle(String titl) {

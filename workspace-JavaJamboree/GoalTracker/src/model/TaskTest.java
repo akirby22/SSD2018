@@ -28,6 +28,10 @@ public class TaskTest {
 		getSize();
 		deleteTasks(task2);
 		getSize();
+		
+		String s4 = "BETTER title";
+		Task task1Again = new Task(s4, s2, sD, eD, urg, imp, getIDCount(), firstTask, s3, goalID);
+		updateTask(task1, task1Again);
 	}
 	//************************************END OF MAIN************************************************************
 	
@@ -57,6 +61,11 @@ public class TaskTest {
 				allTasks.remove(i);
 			}
 		}
+	}
+	
+	public static void updateTask(Task oldTask, Task newTask) { //takes old task and new task, deletes old task, adds new task
+		deleteTasks(oldTask);
+		addTasks(newTask);
 	}
 	
 	public static void getSize() { // just for testing purposes
