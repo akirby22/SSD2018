@@ -43,18 +43,18 @@ public class Task {
 		setNumDays(sDate, eDate);
 		setPriority(urg, imp);
 		
-		/*System.out.println(title);
-		System.out.println(description);
+		/*//System.out.println(title);
+		//System.out.println(description);
 		System.out.println("StartDate is " + startDate);
 		System.out.println("EndDate is " + endDate);
-		System.out.println("Urgent is " + urgent);
-		System.out.println("Important is " + important);
+		//System.out.println("Urgent is " + urgent);
+		//System.out.println("Important is " + important);
 		System.out.println("ID is " + ID);
 		System.out.println("NumDays is " + numDays);
-		System.out.println("Priority is " + priority);
+		//System.out.println("Priority is " + priority);
 		System.out.println("Task num is " + taskNum);
-		System.out.println(goalDescription);
-		System.out.println("Goal ID is " + goalID);
+		//System.out.println(goalDescription);
+		//System.out.println("Goal ID is " + goalID);
 		System.out.println("");*/
 	}
 	

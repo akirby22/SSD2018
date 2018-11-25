@@ -26,12 +26,56 @@ public class TaskTest {
 		Task task2 = new Task(s1, s2, sD, eD + 4, urg, imp, getIDCount(), firstTask, s3, goalID);
 		createTasks(task2);
 		getSize();
+		deleteTasks(task2);
+		getSize();
 	}
 	//************************************END OF MAIN************************************************************
 	
 	private static int idCount;
-	private static ArrayList<Task> allTasks = new ArrayList<Task>(); //this is the .csv file
-	private static Map<Integer, Object> all = new HashMap<>(365); //this is what will sort into days
+	private static ArrayList<Task> allTasks = new ArrayList<Task>(); //the .csv file loads to and saves from this
+	
+	public static int getIDCount() {
+		int temp = idCount;
+		idCount++;
+		return temp;
+	}
+	
+	public static void createTasks(Task task) {
+		allTasks.add(task);
+		
+		if(task.getNumDays() != 0) { //not last day
+			Task temp = new Task(task.getTitle(), task.getDescription(), task.getStartDate() + 1, 
+					task.getEndDate(), task.getUrgent(), task.getImportant(), task.getID(), task.getTaskNum() + 1, task.getGoalDescription(), task.getGoalID());
+			createTasks(temp);
+		}
+	}
+	
+	public static void deleteTasks(Task task) {//takes the task to be deleted and deletes all instances of that task
+		int taskID = task.getID();
+		for(int i = allTasks.size() - 1; i >= 0; i--) { //starts at end and goes towards 0
+			if(allTasks.get(i).getID() == taskID) {
+				allTasks.remove(i);
+			}
+		}
+	}
+	
+	public static void getSize() { // just for testing purposes
+		System.out.println("");
+		System.out.println("Array Size: " + allTasks.size());
+		/*for(int i = 0; i < allTasks.size(); i++) {
+			System.out.println("ID is " + allTasks.get(i).getID());
+		}*/
+	}
+	
+	/*public static void putIntoHash() {
+		Integer index = 0;
+		for(int i = 0; i < allTasks.size(); i++) {
+			index = allTasks.get(i).getStartDate();
+			all.put(index, allTasks.get(i));
+			System.out.println(all.get(index));
+		}
+	}*/
+	//private static Map<Integer, Object> all = new HashMap<>(365); //this is what will sort into days
 	//private static Map<Object, ArrayList<Object>> multiMap = new HashMap<>();
 	
 	/*private static void fillHash() {
@@ -62,35 +106,5 @@ public class TaskTest {
 		Map<Integer, ArrayList<Task>> all = new HashMap<>(365);
 		count++;
 		all.put(count, null);
-	}*/
-	
-	public static int getIDCount() {
-		int temp = idCount;
-		idCount++;
-		return temp;
-	}
-	
-	public static void createTasks(Task task) {
-		allTasks.add(task);
-		
-		if(task.getNumDays() != 0) { //not last day
-			Task temp = new Task(task.getTitle(), task.getDescription(), task.getStartDate() + 1, 
-					task.getEndDate(), task.getUrgent(), task.getImportant(), task.getID(), task.getTaskNum() + 1, task.getGoalDescription(), task.getGoalID());
-			createTasks(temp);
-		}
-	}
-	
-	public static void getSize() {
-		System.out.println("");
-		System.out.println("Array Size: " + allTasks.size());
-	}
-	
-	/*public static void putIntoHash() {
-		Integer index = 0;
-		for(int i = 0; i < allTasks.size(); i++) {
-			index = allTasks.get(i).getStartDate();
-			all.put(index, allTasks.get(i));
-			System.out.println(all.get(index));
-		}
 	}*/
 }
