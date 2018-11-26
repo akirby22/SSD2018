@@ -41,6 +41,9 @@ public class TaskUI implements ActionListener {
 	JComboBox<String> c;
 	List<String> Goals = new ArrayList<String>();
 
+	/**
+	 * Task screen GUI.
+	 */
 	public void actionPerformed(ActionEvent e) {
 		frmTask = new JFrame("Task");
 		JTextField t1, t2, t3, t4, t5, t6, t7, t8;
@@ -149,12 +152,18 @@ public class TaskUI implements ActionListener {
 			pnlTask.setBorder(BorderFactory.createTitledBorder("Task"));
 			pnlTask.setBounds(100, 100, 400, 310);
 
+			/**
+			 * Closes task screen.
+			 */
 			btnCancel.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					frmTask.dispose();
 				}
 			});
 
+			/**
+			 * Saves entered data into allTasks ArrayList and into .csv file.
+			 */
 			btnSave.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -191,6 +200,9 @@ public class TaskUI implements ActionListener {
 				}
 			});
 			
+			/**
+			 * Deletes all instances of the displayed task.
+			 */
 			btnDelete.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -229,17 +241,44 @@ public class TaskUI implements ActionListener {
 	private static int idCount;
 	private static ArrayList<Task> allTasks = new ArrayList<Task>(); //the .csv file loads to and saves from this
 	
+	/**
+	 * Gets the generated unique task ID.
+	 * @return the int task ID.
+	 */
 	public static int getIDCount() {
 		int temp = idCount;
 		idCount++;
 		return temp;
 	}
 	
+	/**
+	 * Converts the info from start and end dates and creates tasks.
+	 * @param titl a String title.
+	 * @param desc a String description.
+	 * @param sMonth an int starting month.
+	 * @param sDay an int starting day.
+	 * @param sYear an int starting year.
+	 * @param eMonth an int ending month.
+	 * @param eDay an int ending day.
+	 * @param eYear and int ending year.
+	 * @param urg a boolean urgency.
+	 * @param imp a boolean importance.
+	 * @param id and int task ID.
+	 * @param fT and int task number.
+	 * @param goalDesc a String description.
+	 * @param gID an int goal ID.
+	 */
 	public static void addTasks(String titl, String desc, int sMonth, int sDay, int sYear, int eMonth, int eDay, int eYear, boolean urg, boolean imp, int id, int fT, String goalDesc, int gID) {
 		Task temp = new Task(titl, desc, convertDate(sMonth, sDay, sYear), convertDate(eMonth, eDay, eYear), urg, imp, id, fT, goalDesc, gID);
 		createTasks(temp);
 	}
-	
+	/**
+	 * Converts the given month, day, and year into the day if the year 1-365.
+	 * @param Month an int.
+	 * @param Day an int.
+	 * @param Year an int.
+	 * @return an int day of year.
+	 */
 	public static int convertDate(int Month, int Day, int Year) {//converts dates fields into an int
 		GregorianCalendar gc = new GregorianCalendar();
         switch (Month) {
@@ -275,6 +314,10 @@ public class TaskUI implements ActionListener {
 	    return gc.get(GregorianCalendar.DAY_OF_YEAR);
 	}
 	
+	/**
+	 * Creates a task for each day the task is present.
+	 * @param task a Task object.
+	 */
 	public static void createTasks(Task task) {
 		allTasks.add(task);
 		
@@ -285,6 +328,10 @@ public class TaskUI implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Deletes all instances of a task.
+	 * @param task a Task object.
+	 */
 	public static void deleteTasks(Task task) {//takes the task to be deleted and deletes all instances of that task
 		int taskID = task.getID();
 		for(int i = allTasks.size() - 1; i >= 0; i--) { //starts at end and goes towards 0

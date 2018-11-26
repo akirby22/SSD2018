@@ -20,6 +20,10 @@ public class GoalTracker {
 	static int realYear, realMonth, realDay, currentYear, currentMonth;
 	static JTabbedPane tabs;
 
+	/**
+	 * Calendar GUI.
+	 * @param args
+	 */
 	public static void main(String args[]) {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -134,6 +138,11 @@ public class GoalTracker {
 		refreshCalendar(realMonth, realYear);
 	}
 
+	/**
+	 * Sets up the calendar.
+	 * @param month an int.
+	 * @param year an int.
+	 */
 	public static void refreshCalendar(int month, int year) {
 		String[] months = { "January", "February", "March", "April", "May", "June", "July", "August", "September",
 				"October", "November", "December" };
@@ -165,12 +174,14 @@ public class GoalTracker {
 			int row = new Integer((i + som - 2) / 7);
 			int column = (i + som - 2) % 7;
 			mtblCalendar.setValueAt(i, row, column);
-			//insert print/button stuff here
 		}
 
 		mnthTblCalendar.setDefaultRenderer(mnthTblCalendar.getColumnClass(0), new tblCalendarRenderer());
 	}
 
+	/**
+	 * Displays the calendar.
+	 */
 	static class tblCalendarRenderer extends DefaultTableCellRenderer {
 		public Component getTableCellRendererComponent(JTable table, Object value, boolean selected, boolean focused,
 				int row, int column) {
@@ -192,6 +203,9 @@ public class GoalTracker {
 		}
 	}
 
+	/**
+	 * Button moves to previous month.
+	 */
 	static class btnPrev_Action implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (currentMonth == 0) {
@@ -204,6 +218,9 @@ public class GoalTracker {
 		}
 	}
 
+	/**
+	 * Button moves to next month.
+	 */
 	static class btnNext_Action implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (currentMonth == 11) {
@@ -216,6 +233,9 @@ public class GoalTracker {
 		}
 	}
 
+	/**
+	 * Dropdown box to select year.
+	 */
 	static class cmbYear_Action implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (cmbYear.getSelectedItem() != null) {
