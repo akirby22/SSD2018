@@ -1,7 +1,6 @@
 package main;
 
 import javax.swing.*;
-import javax.swing.event.*;
 import javax.swing.table.*;
 
 import java.awt.*;
@@ -127,8 +126,6 @@ public class GoalTracker {
 		mtblCalendar.setColumnCount(7);
 		mtblCalendar.setRowCount(6);
 		mtblCalendar.getColumnCount();
-		// mtblCalendar.getColumnCount().setCellRenderer(new
-		// ClientsTableButtonRenderer());
 
 		for (int i = realYear - 100; i <= realYear + 100; i++) {
 			cmbYear.addItem(String.valueOf(i));
@@ -175,11 +172,7 @@ public class GoalTracker {
 		for (int i = 1; i <= nod; i++) {
 			int row = new Integer((i + som - 2) / 7);
 			int column = (i + som - 2) % 7;
-			// mtblCalendar.setValueAt(i, row, column);
-			// date = new JButton(Integer.toString(i));
 			mtblCalendar.setValueAt(i, row, column);
-			;
-			// insert print/button stuff here
 		}
 
 		mnthTblCalendar.setDefaultRenderer(mnthTblCalendar.getColumnClass(0), new tblCalendarRenderer());
