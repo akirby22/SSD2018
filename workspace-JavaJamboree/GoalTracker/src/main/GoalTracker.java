@@ -47,21 +47,6 @@ public class GoalTracker {
 		pane.setLayout(null);
 		frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		// tabs = new JTabbedPane();
-		// tabs.setBounds(10, 70, 680, 500);
-		//// tabs.add(pnlCalendarMonth);
-		//
-		// JFrame frame = new JFrame();
-		// JMenuBar bar = new JMenuBar();
-		// bar.add(new JMenu("menu"));
-		// frame.setJMenuBar(bar);
-		// frame.add(new JButton("button"));
-		//
-		// JPanel tab1 = new JPanel(new BorderLayout());
-		// tab1.add(frame.getJMenuBar(),BorderLayout.NORTH);
-		// tab1.add(frame.getContentPane());
-		// tabs.addTab("1", tab1);
-
 		lblMonth = new JLabel("January");
 		lblYear = new JLabel("Change year:");
 		cmbYear = new JComboBox<String>();
@@ -297,12 +282,18 @@ public class GoalTracker {
 			try {
 				TaskUI tasks = new TaskUI();
 				tasks.fillList(day, currentMonth + 1, currentYear);
+				addActionListener();
 				System.out.println(day + " " + currentMonth + 1 + " " + currentYear);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 
+		}
+
+		private void addActionListener() throws IOException {
+			new TaskViewer();
+			
 		}
 	}
 
