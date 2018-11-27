@@ -21,7 +21,7 @@ public class TaskViewer {
 		pane.setLayout(null);
 		TasksonDay = new JPanel(null);
 		pane.add(TasksonDay);
-		frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("src/day.csv"));
