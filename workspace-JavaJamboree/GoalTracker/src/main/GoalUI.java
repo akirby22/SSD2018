@@ -68,7 +68,7 @@ public class GoalUI implements ActionListener {
 
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frmGoal.dispose();
+				
 			}
 		});
 
@@ -87,6 +87,7 @@ public class GoalUI implements ActionListener {
 					br.write(goal.getGTitle() + "\t" + goal.getGDescription() + "\n");
 					System.out.println("Goal updated");
 					br.close();
+					frmGoal.dispose();
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
