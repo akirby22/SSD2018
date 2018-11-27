@@ -24,6 +24,10 @@ public class GoalUI implements ActionListener {
 	static JPanel pnlGoal;
 	static JButton btnSave, btnDelete, btnCancel;
 
+	/**
+	 * Goal screen GUI.
+	 */
+
 	public void actionPerformed(ActionEvent e) {
 		frmGoal = new JFrame("Goal");
 		JTextField t1, t2;
@@ -68,6 +72,9 @@ public class GoalUI implements ActionListener {
 			}
 		});
 
+		/**
+		 * Saves the goal into the .csv file.
+		 */
 		btnSave.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
