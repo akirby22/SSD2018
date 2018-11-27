@@ -1,7 +1,16 @@
-TTitle	TDescription	327	333	true	true	0	1	GTitle	0
-TTitle	TDescription	328	333	true	true	0	2	GTitle	0
-TTitle	TDescription	329	333	true	true	0	3	GTitle	0
-TTitle	TDescription	330	333	true	true	0	4	GTitle	0
-TTitle	TDescription	331	333	true	true	0	5	GTitle	0
-TTitle	TDescription	332	333	true	true	0	6	GTitle	0
-TTitle	TDescription	333	333	true	true	0	7	GTitle	0
+1task		331	334	true	true	0	1	1goal	0
+1task		332	334	true	true	0	2	1goal	0
+1task		333	334	true	true	0	3	1goal	0
+1task		334	334	true	true	0	4	1goal	0
+2task	hi	331	334	false	true	1	1	1goal	0
+2task	hi	332	334	false	true	1	2	1goal	0
+2task	hi	333	334	false	true	1	3	1goal	0
+2task	hi	334	334	false	true	1	4	1goal	0
+3 task		331	334	true	false	0	1	1goal	0
+3 task		332	334	true	false	0	2	1goal	0
+3 task		333	334	true	false	0	3	1goal	0
+3 task		334	334	true	false	0	4	1goal	0
+5task		331	334	false	true	0	1	1goal	0
+5task		332	334	false	true	0	2	1goal	0
+5task		333	334	false	true	0	3	1goal	0
+5task		334	334	false	true	0	4	1goal	0

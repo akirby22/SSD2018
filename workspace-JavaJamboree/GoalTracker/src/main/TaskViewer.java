@@ -40,12 +40,12 @@ public class TaskViewer {
 					btnTasks.setForeground(Color.RED);
 				}
 				if (Boolean.valueOf(task[5]) == true && Boolean.valueOf(task[4]) == false) {
-					btnTasks.setBackground(Color.BLUE);
-					btnTasks.setForeground(Color.BLUE);
+					btnTasks.setBackground(Color.ORANGE);
+					btnTasks.setForeground(Color.ORANGE);
 				}
 				if (Boolean.valueOf(task[5]) == false && Boolean.valueOf(task[4]) == true) {
-					btnTasks.setBackground(Color.GREEN);
-					btnTasks.setForeground(Color.GREEN);
+					btnTasks.setBackground(Color.YELLOW);
+					btnTasks.setForeground(Color.YELLOW);
 				}
 				if (y < 450) {
 					btnTasks.setBounds(x, y, b, h);

@@ -52,6 +52,7 @@ public class TaskUI implements ActionListener {
 	TaskUI() throws IOException {
 
 		try {
+			allTasks.clear();
 			BufferedReader br = new BufferedReader(new FileReader("src/tasks.csv"));
 			String sCurrentLine;
 			while ((sCurrentLine = br.readLine()) != null) {
@@ -209,7 +210,7 @@ public class TaskUI implements ActionListener {
 							r3.isSelected(), getIDCount(), 1, (String) c.getSelectedItem(), 0);
 					FileWriter fileWriter;
 					try {
-						fileWriter = new FileWriter("src/tasks.csv", true);
+						fileWriter = new FileWriter("src/tasks.csv");
 						BufferedWriter br = new BufferedWriter(fileWriter);
 						for (int i = 0; i < allTasks.size(); i++) {
 							Task task = allTasks.get(i);
@@ -247,6 +248,7 @@ public class TaskUI implements ActionListener {
 									+ task.getGoalID() + "\n");
 						}
 						System.out.println("task deleted");
+						fileWriter.close();
 						br.close();
 						frmTask.dispose();
 					} catch (IOException e1) {
@@ -448,9 +450,12 @@ public class TaskUI implements ActionListener {
 	 */
 	public void fillList(int day, int month, int year) {
 		int clickedDay = day + convertDate(month, 1, year);
+		for(int i = 0; i < allTasks.size(); i++) {
+			System.out.println(allTasks.get(i).getTitle());
+		}
 		FileWriter fileWriter;
 		try {
-			fileWriter = new FileWriter("src/day.csv", false);
+			fileWriter = new FileWriter("src/day.csv");
 			BufferedWriter br = new BufferedWriter(fileWriter);
 			System.out.println(allTasks.size());
 			for (int i = 0; i < allTasks.size(); i++) {
@@ -465,6 +470,7 @@ public class TaskUI implements ActionListener {
 				}
 			}
 			System.out.println("day.csv updated");
+			//fileWriter.close();
 			br.close();
 		} catch (IOException e1) {
 			e1.printStackTrace();

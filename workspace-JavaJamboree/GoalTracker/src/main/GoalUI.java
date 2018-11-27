@@ -27,7 +27,6 @@ public class GoalUI implements ActionListener {
 	/**
 	 * Goal screen GUI.
 	 */
-
 	public void actionPerformed(ActionEvent e) {
 		frmGoal = new JFrame("Goal");
 		JTextField t1, t2;
