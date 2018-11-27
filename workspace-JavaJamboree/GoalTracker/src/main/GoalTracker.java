@@ -6,6 +6,7 @@ import javax.swing.table.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.*;
 
 public class GoalTracker {
@@ -23,9 +24,11 @@ public class GoalTracker {
 
 	/**
 	 * Calendar GUI.
+	 * 
 	 * @param args
+	 * @throws IOException
 	 */
-	public static void main(String args[]) {
+	public static void main(String args[]) throws IOException {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			new GoalTracker();
@@ -37,7 +40,7 @@ public class GoalTracker {
 
 	}
 
-	GoalTracker() {
+	GoalTracker() throws IOException {
 		frmMain = new JFrame("SSD");
 		frmMain.setSize(900, 900);
 		pane = frmMain.getContentPane();
@@ -151,8 +154,11 @@ public class GoalTracker {
 
 	/**
 	 * Sets up the calendar.
-	 * @param month an int.
-	 * @param year an int.
+	 * 
+	 * @param month
+	 *            an int.
+	 * @param year
+	 *            an int.
 	 */
 	public static void refreshCalendar(int month, int year) {
 		String[] months = { "January", "February", "March", "April", "May", "June", "July", "August", "September",
@@ -287,7 +293,16 @@ public class GoalTracker {
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			System.out.println(day + " " + currentMonth + " " + currentYear);
+
+			try {
+				TaskUI tasks = new TaskUI();
+				tasks.fillList(day, currentMonth + 1, currentYear);
+				System.out.println(day + " " + currentMonth + 1 + " " + currentYear);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
 		}
 	}
 

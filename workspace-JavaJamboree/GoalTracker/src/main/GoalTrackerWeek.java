@@ -8,6 +8,7 @@ import main.GoalTracker.tblCalendarRenderer;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.*;
 
 public class GoalTrackerWeek {
@@ -23,7 +24,7 @@ public class GoalTrackerWeek {
 	static int realYear, realMonth, realWeek, realDay, currentWeek, currentYear, currentMonth;
 	static JTabbedPane tabs;
 
-	public static void main(String args[]) {
+	public static void main(String args[]) throws IOException {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			new GoalTrackerWeek();
@@ -35,7 +36,7 @@ public class GoalTrackerWeek {
 
 	}
 
-	GoalTrackerWeek() {
+	GoalTrackerWeek() throws IOException {
 		frmMain = new JFrame("SSDweek");
 		frmMain.setSize(900, 900);
 		pane = frmMain.getContentPane();

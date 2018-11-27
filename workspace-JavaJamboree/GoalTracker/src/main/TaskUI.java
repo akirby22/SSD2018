@@ -40,10 +40,43 @@ public class TaskUI implements ActionListener {
 	DateFormat format = new SimpleDateFormat("mm-dd-yyyy");
 	JComboBox<String> c;
 	List<String> Goals = new ArrayList<String>();
+	private ArrayList<Task> allTasks = new ArrayList<Task>();
+	private int idCount;
 
 	/**
 	 * Task screen GUI.
+	 * 
+	 * @throws IOException
 	 */
+
+	TaskUI() throws IOException {
+
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("src/tasks.csv"));
+			String sCurrentLine;
+			while ((sCurrentLine = br.readLine()) != null) {
+				String[] task = sCurrentLine.split("\t");
+				allTasks.add(new Task(task[0], task[1], Integer.parseInt(task[2]), Integer.parseInt(task[3]),
+						Boolean.valueOf(task[4]), Boolean.valueOf(task[5]), Integer.parseInt(task[6]),
+						Integer.parseInt(task[7]), task[8], Integer.parseInt(task[9])));
+			}
+			br.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+
+		}
+	}
+
+	// the .csv
+	// file
+	// loads
+	// to
+	// and
+	// saves
+	// from
+	// this
+
 	public void actionPerformed(ActionEvent e) {
 		frmTask = new JFrame("Task");
 		JTextField t1, t2, t3, t4, t5, t6, t7, t8;
@@ -57,8 +90,10 @@ public class TaskUI implements ActionListener {
 		try (BufferedReader br = new BufferedReader(new FileReader("src/goals.csv"))) {
 			String sCurrentLine;
 			while ((sCurrentLine = br.readLine()) != null) {
-				if (!Goals.contains(sCurrentLine))
-					Goals.add(sCurrentLine);
+				if (!Goals.contains(sCurrentLine)) {
+					String[] goal = sCurrentLine.split("\t");
+					Goals.add(goal[0]);
+				}
 			}
 
 			l1 = new JLabel("Title");
@@ -167,17 +202,20 @@ public class TaskUI implements ActionListener {
 			btnSave.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					addTasks(t1.getText(), t2.getText(), Integer.parseInt(t3.getText()), Integer.parseInt(t4.getText()), Integer.parseInt(t5.getText()), Integer.parseInt(t6.getText()), Integer.parseInt(t7.getText()), Integer.parseInt(t8.getText()), r1.isSelected(), r3.isSelected(), getIDCount(), 1,
-							"tempgoaldesc", 0);
+					addTasks(t1.getText(), t2.getText(), Integer.parseInt(t3.getText()), Integer.parseInt(t4.getText()),
+							Integer.parseInt(t5.getText()), Integer.parseInt(t6.getText()),
+							Integer.parseInt(t7.getText()), Integer.parseInt(t8.getText()), r1.isSelected(),
+							r3.isSelected(), getIDCount(), 1, (String) c.getSelectedItem(), 0);
 					FileWriter fileWriter;
 					try {
 						fileWriter = new FileWriter("src/tasks.csv", true);
 						BufferedWriter br = new BufferedWriter(fileWriter);
-						for(int i = 0; i < allTasks.size(); i++) {
+						for (int i = 0; i < allTasks.size(); i++) {
 							Task task = allTasks.get(i);
 							br.write(task.getTitle() + "\t" + task.getDescription() + "\t" + task.getStartDate() + "\t"
 									+ task.getEndDate() + "\t" + task.getUrgent() + "\t" + task.getImportant() + "\t"
-									+ task.getID() + "\t" + task.getTaskNum() + task.getGoalDescription() + "\t" + task.getGoalID() + "\n");
+									+ task.getID() + "\t" + task.getTaskNum() + "\t" + task.getGoalDescription() + "\t"
+									+ task.getGoalID() + "\n");
 						}
 						System.out.println("task added");
 						br.close();
@@ -188,23 +226,24 @@ public class TaskUI implements ActionListener {
 
 				}
 			});
-			
+
 			/**
 			 * Deletes all instances of the displayed task.
 			 */
 			btnDelete.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					//Enter code here to send task to deleteTasks(Task task)
+					// Enter code here to send task to deleteTasks(Task task)
 					FileWriter fileWriter;
 					try {
 						fileWriter = new FileWriter("src/tasks.csv");
 						BufferedWriter br = new BufferedWriter(fileWriter);
-						for(int i = 0; i < allTasks.size(); i++) {
+						for (int i = 0; i < allTasks.size(); i++) {
 							Task task = allTasks.get(i);
 							br.write(task.getTitle() + "\t" + task.getDescription() + "\t" + task.getStartDate() + "\t"
 									+ task.getEndDate() + "\t" + task.getUrgent() + "\t" + task.getImportant() + "\t"
-									+ task.getID() + "\t" + task.getTaskNum() + task.getGoalDescription() + "\t" + task.getGoalID() + "\n");
+									+ task.getID() + "\t" + task.getTaskNum() + task.getGoalDescription() + "\t"
+									+ task.getGoalID() + "\n");
 						}
 						System.out.println("task deleted");
 						br.close();
@@ -226,151 +265,200 @@ public class TaskUI implements ActionListener {
 			e2.printStackTrace();
 		}
 	}
-	
-	private static int idCount;
-	private static ArrayList<Task> allTasks = new ArrayList<Task>(); //the .csv file loads to and saves from this
-	
+
 	/**
 	 * Gets the generated unique task ID.
+	 * 
 	 * @return the int task ID.
 	 */
-	public static int getIDCount() {
+	public int getIDCount() {
 		int temp = idCount;
 		idCount++;
 		return temp;
 	}
-	
+
 	/**
 	 * Converts the info from start and end dates and creates tasks.
-	 * @param titl a String title.
-	 * @param desc a String description.
-	 * @param sMonth an int starting month.
-	 * @param sDay an int starting day.
-	 * @param sYear an int starting year.
-	 * @param eMonth an int ending month.
-	 * @param eDay an int ending day.
-	 * @param eYear and int ending year.
-	 * @param urg a boolean urgency.
-	 * @param imp a boolean importance.
-	 * @param id and int task ID.
-	 * @param fT and int task number.
-	 * @param goalDesc a String description.
-	 * @param gID an int goal ID.
+	 * 
+	 * @param titl
+	 *            a String title.
+	 * @param desc
+	 *            a String description.
+	 * @param sMonth
+	 *            an int starting month.
+	 * @param sDay
+	 *            an int starting day.
+	 * @param sYear
+	 *            an int starting year.
+	 * @param eMonth
+	 *            an int ending month.
+	 * @param eDay
+	 *            an int ending day.
+	 * @param eYear
+	 *            and int ending year.
+	 * @param urg
+	 *            a boolean urgency.
+	 * @param imp
+	 *            a boolean importance.
+	 * @param id
+	 *            and int task ID.
+	 * @param fT
+	 *            and int task number.
+	 * @param goalDesc
+	 *            a String description.
+	 * @param gID
+	 *            an int goal ID.
 	 */
-	public static void addTasks(String titl, String desc, int sMonth, int sDay, int sYear, int eMonth, int eDay, int eYear, boolean urg, boolean imp, int id, int fT, String goalDesc, int gID) {
-		Task temp = new Task(titl, desc, convertDate(sMonth, sDay, sYear), convertDate(eMonth, eDay, eYear), urg, imp, id, fT, goalDesc, gID);
+	public void addTasks(String titl, String desc, int sMonth, int sDay, int sYear, int eMonth, int eDay, int eYear,
+			boolean urg, boolean imp, int id, int fT, String goalDesc, int gID) {
+		Task temp = new Task(titl, desc, convertDate(sMonth, sDay, sYear), convertDate(eMonth, eDay, eYear), urg, imp,
+				id, fT, goalDesc, gID);
 		createTasks(temp);
 	}
+
 	/**
 	 * Converts the given month, day, and year into the day if the year 1-365.
-	 * @param Month an int.
-	 * @param Day an int.
-	 * @param Year an int.
+	 * 
+	 * @param Month
+	 *            an int.
+	 * @param Day
+	 *            an int.
+	 * @param Year
+	 *            an int.
 	 * @return an int day of year.
 	 */
-	public static int convertDate(int Month, int Day, int Year) {//converts dates fields into an int
+	public int convertDate(int Month, int Day, int Year) {// converts
+															// dates
+															// fields
+															// into an
+															// int
 		GregorianCalendar gc = new GregorianCalendar();
-        switch (Month) {
-            case 1:  gc.set(GregorianCalendar.MONTH, GregorianCalendar.JANUARY);;
-                     break;
-            case 2:  gc.set(GregorianCalendar.MONTH, GregorianCalendar.FEBRUARY);
-                     break;
-            case 3:  gc.set(GregorianCalendar.MONTH, GregorianCalendar.MARCH);
-                     break;
-            case 4:  gc.set(GregorianCalendar.MONTH, GregorianCalendar.APRIL);
-                     break;
-            case 5:  gc.set(GregorianCalendar.MONTH, GregorianCalendar.MAY);
-                     break;
-            case 6:  gc.set(GregorianCalendar.MONTH, GregorianCalendar.JUNE);
-                     break;
-            case 7:  gc.set(GregorianCalendar.MONTH, GregorianCalendar.JULY);
-                     break;
-            case 8:  gc.set(GregorianCalendar.MONTH, GregorianCalendar.AUGUST);
-                     break;
-            case 9:  gc.set(GregorianCalendar.MONTH, GregorianCalendar.SEPTEMBER);
-                     break;
-            case 10: gc.set(GregorianCalendar.MONTH, GregorianCalendar.OCTOBER);
-                     break;
-            case 11: gc.set(GregorianCalendar.MONTH, GregorianCalendar.NOVEMBER);
-                     break;
-            case 12: gc.set(GregorianCalendar.MONTH, GregorianCalendar.DECEMBER);
-                     break;
-            default: break;
-        }
+		switch (Month) {
+		case 1:
+			gc.set(GregorianCalendar.MONTH, GregorianCalendar.JANUARY);
+			;
+			break;
+		case 2:
+			gc.set(GregorianCalendar.MONTH, GregorianCalendar.FEBRUARY);
+			break;
+		case 3:
+			gc.set(GregorianCalendar.MONTH, GregorianCalendar.MARCH);
+			break;
+		case 4:
+			gc.set(GregorianCalendar.MONTH, GregorianCalendar.APRIL);
+			break;
+		case 5:
+			gc.set(GregorianCalendar.MONTH, GregorianCalendar.MAY);
+			break;
+		case 6:
+			gc.set(GregorianCalendar.MONTH, GregorianCalendar.JUNE);
+			break;
+		case 7:
+			gc.set(GregorianCalendar.MONTH, GregorianCalendar.JULY);
+			break;
+		case 8:
+			gc.set(GregorianCalendar.MONTH, GregorianCalendar.AUGUST);
+			break;
+		case 9:
+			gc.set(GregorianCalendar.MONTH, GregorianCalendar.SEPTEMBER);
+			break;
+		case 10:
+			gc.set(GregorianCalendar.MONTH, GregorianCalendar.OCTOBER);
+			break;
+		case 11:
+			gc.set(GregorianCalendar.MONTH, GregorianCalendar.NOVEMBER);
+			break;
+		case 12:
+			gc.set(GregorianCalendar.MONTH, GregorianCalendar.DECEMBER);
+			break;
+		default:
+			break;
+		}
 		gc.set(GregorianCalendar.DAY_OF_MONTH, Day);
-	    gc.set(GregorianCalendar.YEAR, Year);
-	    
-	    return gc.get(GregorianCalendar.DAY_OF_YEAR);
+		gc.set(GregorianCalendar.YEAR, Year);
+
+		return gc.get(GregorianCalendar.DAY_OF_YEAR);
 	}
-	
+
 	/**
 	 * Creates a task for each day the task is present.
-	 * @param task a Task object.
+	 * 
+	 * @param task
+	 *            a Task object.
 	 */
-	public static void createTasks(Task task) {
+	public void createTasks(Task task) {
 		allTasks.add(task);
-		
-		if(task.getNumDays() != 0) { //not last day
-			Task temp = new Task(task.getTitle(), task.getDescription(), task.getStartDate() + 1, 
-					task.getEndDate(), task.getUrgent(), task.getImportant(), task.getID(), task.getTaskNum() + 1, task.getGoalDescription(), task.getGoalID());
+
+		if (task.getNumDays() != 0) { // not last day
+			Task temp = new Task(task.getTitle(), task.getDescription(), task.getStartDate() + 1, task.getEndDate(),
+					task.getUrgent(), task.getImportant(), task.getID(), task.getTaskNum() + 1,
+					task.getGoalDescription(), task.getGoalID());
 			createTasks(temp);
 		}
 	}
-	
+
 	/**
 	 * Deletes all instances of a task.
-	 * @param task a Task object.
+	 * 
+	 * @param task
+	 *            a Task object.
 	 */
-	public static void deleteTasks(Task task) {//takes the task to be deleted and deletes all instances of that task
+	public void deleteTasks(Task task) {// takes the task to be deleted
+										// and deletes all instances of
+										// that task
 		int taskID = task.getID();
-		for(int i = allTasks.size() - 1; i >= 0; i--) { //starts at end and goes towards 0
-			if(allTasks.get(i).getID() == taskID) {
+		for (int i = allTasks.size() - 1; i >= 0; i--) { // starts at end and
+															// goes towards 0
+			if (allTasks.get(i).getID() == taskID) {
 				allTasks.remove(i);
 			}
 		}
 	}
-	
-	public static void updateTask(Task oldTask, Task newTask) { //takes old task and new task, deletes old task, adds new task
+
+	public void updateTask(Task oldTask, Task newTask) { // takes old
+															// task and new
+															// task, deletes
+															// old task,
+															// adds new task
 		deleteTasks(oldTask);
-		//addTasks(newTask);
+		// addTasks(newTask);
 	}
-	
-	/*public static void printTasks() { //today = 0
-		for(int i = 1; i < 10; i++) {//for each day (only 10 here)
-			System.out.println("Day " + i);
-			for(int j = 1; j < 5; j++) {//for each priority
-				System.out.println("Priority " + j);
-				for(int k = 0; k < allTasks.size(); k++) {//go through each task in allTasks
-					Task temp = allTasks.get(k);
-					if(temp.getStartDate() == i && temp.getPriority() == j) {
-						System.out.println(temp.getTitle());
-					}
-				}
-				System.out.println("");
-			}
-			System.out.println("----------------------------");
-		}
-	}*/
-	
+
+	/*
+	 * public static void printTasks() { //today = 0 for(int i = 1; i < 10; i++)
+	 * {//for each day (only 10 here) System.out.println("Day " + i); for(int j
+	 * = 1; j < 5; j++) {//for each priority System.out.println("Priority " +
+	 * j); for(int k = 0; k < allTasks.size(); k++) {//go through each task in
+	 * allTasks Task temp = allTasks.get(k); if(temp.getStartDate() == i &&
+	 * temp.getPriority() == j) { System.out.println(temp.getTitle()); } }
+	 * System.out.println(""); }
+	 * System.out.println("----------------------------"); } }
+	 */
+
 	/**
 	 * Fills the day.csv file.
-	 * @param day an int.
-	 * @param month an int.
-	 * @param year an int.
+	 * 
+	 * @param day
+	 *            an int.
+	 * @param month
+	 *            an int.
+	 * @param year
+	 *            an int.
 	 */
-	public static void fillList(int day, int month, int year) {
+	public void fillList(int day, int month, int year) {
 		int clickedDay = day + convertDate(month, 1, year);
 		FileWriter fileWriter;
 		try {
 			fileWriter = new FileWriter("src/day.csv", false);
 			BufferedWriter br = new BufferedWriter(fileWriter);
-			for(int i = 0; i < allTasks.size(); i++) {
+			System.out.println(allTasks.size());
+			for (int i = 0; i < allTasks.size(); i++) {
 				Task task = allTasks.get(i);
 				for (int j = 1; j < 5; j++) {
 					if (task.getStartDate() == clickedDay && task.getPriority() == j) {
 						br.write(task.getTitle() + "\t" + task.getDescription() + "\t" + task.getStartDate() + "\t"
 								+ task.getEndDate() + "\t" + task.getUrgent() + "\t" + task.getImportant() + "\t"
-								+ task.getID() + "\t" + task.getTaskNum() + task.getGoalDescription() + "\t"
+								+ task.getID() + "\t" + task.getTaskNum() + "\t" + task.getGoalDescription() + "\t"
 								+ task.getGoalID() + "\n");
 					}
 				}
@@ -381,5 +469,5 @@ public class TaskUI implements ActionListener {
 			e1.printStackTrace();
 		}
 	}
-	
+
 }
