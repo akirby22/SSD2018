@@ -30,7 +30,8 @@ public class TaskViewer {
 			int y = 100;
 			int b = 70;
 			int h = 40;
-			int xx = 100;
+			int xx = 200;
+			int yy = 100;
 			while ((sCurrentLine = br.readLine()) != null) {
 				String[] task = sCurrentLine.split("\t");
 				btnTasks = new JButton(task[0]);
@@ -52,7 +53,7 @@ public class TaskViewer {
 					y = y + 50;
 				} else {
 					btnTasks.setBounds(xx, y, b, h);
-					y = y + 30;
+					y = y + 50;
 				}
 				TasksonDay.add(btnTasks);
 				// System.out.println(task[0]);

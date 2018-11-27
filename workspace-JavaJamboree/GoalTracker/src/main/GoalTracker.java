@@ -175,7 +175,7 @@ public class GoalTracker {
 			mtblCalendar.setValueAt(i, row, column);
 		}
 
-		mnthTblCalendar.setDefaultRenderer(mnthTblCalendar.getColumnClass(0), new tblCalendarRenderer());
+		
 		int x = 30;
 		int y = 630;
 		int b = 30;
@@ -194,6 +194,8 @@ public class GoalTracker {
 			pnlCalendarMonth.add(btnDate);
 			btnDate.addActionListener(new btnDate_Action(i));
 		}
+		
+		mnthTblCalendar.setDefaultRenderer(mnthTblCalendar.getColumnClass(0), new tblCalendarRenderer());
 	}
 
 	/**
@@ -276,7 +278,7 @@ public class GoalTracker {
 				TaskUI tasks = new TaskUI();
 				tasks.fillList(day, currentMonth + 1, currentYear);
 				addActionListener();
-				System.out.println(day + " " + currentMonth + 1 + " " + currentYear);
+				System.out.println(day + " " + currentMonth/+1 + " " + currentYear);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

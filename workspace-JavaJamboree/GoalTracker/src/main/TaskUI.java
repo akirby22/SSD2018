@@ -40,7 +40,7 @@ public class TaskUI implements ActionListener {
 	DateFormat format = new SimpleDateFormat("mm-dd-yyyy");
 	JComboBox<String> c;
 	List<String> Goals;
-	private ArrayList<Task> allTasks = new ArrayList<Task>();
+	private ArrayList<Task> allTasks;
 	private int idCount;
 
 	/**
@@ -54,12 +54,15 @@ public class TaskUI implements ActionListener {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("src/tasks.csv"));
 			String sCurrentLine;
+			allTasks = new ArrayList<Task>();
 			while ((sCurrentLine = br.readLine()) != null) {
 				String[] task = sCurrentLine.split("\t");
-				allTasks.add(new Task(task[0], task[1], Integer.parseInt(task[2]), Integer.parseInt(task[3]),
-						Boolean.valueOf(task[4]), Boolean.valueOf(task[5]), Integer.parseInt(task[6]),
-						Integer.parseInt(task[7]), task[8], Integer.parseInt(task[9])));
-			}
+//				if (allTasks.contains(task)) {
+					allTasks.add(new Task(task[0], task[1], Integer.parseInt(task[2]), Integer.parseInt(task[3]),
+							Boolean.valueOf(task[4]), Boolean.valueOf(task[5]), Integer.parseInt(task[6]),
+							Integer.parseInt(task[7]), task[8], Integer.parseInt(task[9])));
+				}
+//			}
 			br.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
