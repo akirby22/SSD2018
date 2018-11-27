@@ -40,6 +40,13 @@ public class TaskUI implements ActionListener {
 	DateFormat format = new SimpleDateFormat("mm-dd-yyyy");
 	JComboBox<String> c;
 	List<String> Goals = new ArrayList<String>();
+	
+	private int idCount;
+	private ArrayList<Task> allTasks = new ArrayList<Task>(); //the .csv file loads to and saves from this
+	
+	TaskUI() {
+		
+	}
 
 	/**
 	 * Task screen GUI.
@@ -168,7 +175,7 @@ public class TaskUI implements ActionListener {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					addTasks(t1.getText(), t2.getText(), Integer.parseInt(t3.getText()), Integer.parseInt(t4.getText()), Integer.parseInt(t5.getText()), Integer.parseInt(t6.getText()), Integer.parseInt(t7.getText()), Integer.parseInt(t8.getText()), r1.isSelected(), r3.isSelected(), getIDCount(), 1,
-							"tempgoaldesc", 0);
+							(String)c.getSelectedItem(), 0);
 					FileWriter fileWriter;
 					try {
 						fileWriter = new FileWriter("src/tasks.csv", true);
@@ -177,7 +184,7 @@ public class TaskUI implements ActionListener {
 							Task task = allTasks.get(i);
 							br.write(task.getTitle() + "\t" + task.getDescription() + "\t" + task.getStartDate() + "\t"
 									+ task.getEndDate() + "\t" + task.getUrgent() + "\t" + task.getImportant() + "\t"
-									+ task.getID() + "\t" + task.getTaskNum() + task.getGoalDescription() + "\t" + task.getGoalID() + "\n");
+									+ task.getID() + "\t" + task.getTaskNum() + "\t" + task.getGoalDescription() + "\t" + task.getGoalID() + "\n");
 						}
 						System.out.println("task added");
 						br.close();
@@ -227,14 +234,11 @@ public class TaskUI implements ActionListener {
 		}
 	}
 	
-	private static int idCount;
-	private static ArrayList<Task> allTasks = new ArrayList<Task>(); //the .csv file loads to and saves from this
-	
 	/**
 	 * Gets the generated unique task ID.
 	 * @return the int task ID.
 	 */
-	public static int getIDCount() {
+	public int getIDCount() {
 		int temp = idCount;
 		idCount++;
 		return temp;
@@ -257,7 +261,7 @@ public class TaskUI implements ActionListener {
 	 * @param goalDesc a String description.
 	 * @param gID an int goal ID.
 	 */
-	public static void addTasks(String titl, String desc, int sMonth, int sDay, int sYear, int eMonth, int eDay, int eYear, boolean urg, boolean imp, int id, int fT, String goalDesc, int gID) {
+	public void addTasks(String titl, String desc, int sMonth, int sDay, int sYear, int eMonth, int eDay, int eYear, boolean urg, boolean imp, int id, int fT, String goalDesc, int gID) {
 		Task temp = new Task(titl, desc, convertDate(sMonth, sDay, sYear), convertDate(eMonth, eDay, eYear), urg, imp, id, fT, goalDesc, gID);
 		createTasks(temp);
 	}
@@ -268,7 +272,7 @@ public class TaskUI implements ActionListener {
 	 * @param Year an int.
 	 * @return an int day of year.
 	 */
-	public static int convertDate(int Month, int Day, int Year) {//converts dates fields into an int
+	public int convertDate(int Month, int Day, int Year) {//converts dates fields into an int
 		GregorianCalendar gc = new GregorianCalendar();
         switch (Month) {
             case 1:  gc.set(GregorianCalendar.MONTH, GregorianCalendar.JANUARY);;
@@ -307,7 +311,7 @@ public class TaskUI implements ActionListener {
 	 * Creates a task for each day the task is present.
 	 * @param task a Task object.
 	 */
-	public static void createTasks(Task task) {
+	public void createTasks(Task task) {
 		allTasks.add(task);
 		
 		if(task.getNumDays() != 0) { //not last day
@@ -321,7 +325,7 @@ public class TaskUI implements ActionListener {
 	 * Deletes all instances of a task.
 	 * @param task a Task object.
 	 */
-	public static void deleteTasks(Task task) {//takes the task to be deleted and deletes all instances of that task
+	public void deleteTasks(Task task) {//takes the task to be deleted and deletes all instances of that task
 		int taskID = task.getID();
 		for(int i = allTasks.size() - 1; i >= 0; i--) { //starts at end and goes towards 0
 			if(allTasks.get(i).getID() == taskID) {
@@ -330,7 +334,7 @@ public class TaskUI implements ActionListener {
 		}
 	}
 	
-	public static void updateTask(Task oldTask, Task newTask) { //takes old task and new task, deletes old task, adds new task
+	public void updateTask(Task oldTask, Task newTask) { //takes old task and new task, deletes old task, adds new task
 		deleteTasks(oldTask);
 		//addTasks(newTask);
 	}
@@ -358,8 +362,8 @@ public class TaskUI implements ActionListener {
 	 * @param month an int.
 	 * @param year an int.
 	 */
-	public static void fillList(int day, int month, int year) {
-		int clickedDay = day + convertDate(month, 1, year);
+	public void fillList(int day, int month, int year) {
+		int clickedDay = day + convertDate(month + 1, 1, year);
 		FileWriter fileWriter;
 		try {
 			fileWriter = new FileWriter("src/day.csv", false);
@@ -367,6 +371,7 @@ public class TaskUI implements ActionListener {
 			for(int i = 0; i < allTasks.size(); i++) {
 				Task task = allTasks.get(i);
 				for (int j = 1; j < 5; j++) {
+					System.out.println("here");
 					if (task.getStartDate() == clickedDay && task.getPriority() == j) {
 						br.write(task.getTitle() + "\t" + task.getDescription() + "\t" + task.getStartDate() + "\t"
 								+ task.getEndDate() + "\t" + task.getUrgent() + "\t" + task.getImportant() + "\t"
