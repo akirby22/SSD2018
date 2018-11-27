@@ -21,15 +21,20 @@ public class TaskViewer {
 		pane.setLayout(null);
 		TasksonDay = new JPanel(null);
 		pane.add(TasksonDay);
-//		frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("src/day.csv"));
 			String sCurrentLine;
+			int x = 50;
+			int y = 100;
+			int b = 70;
+			int h = 40;
+			int xx = 100;
 			while ((sCurrentLine = br.readLine()) != null) {
 				String[] task = sCurrentLine.split("\t");
 				btnTasks = new JButton(task[0]);
-				System.out.println(Boolean.valueOf(task[5]) + " " + Boolean.valueOf(task[4]));
+//				System.out.println(Boolean.valueOf(task[5]) + " " + Boolean.valueOf(task[4]));
 				if (Boolean.valueOf(task[5]) == true && Boolean.valueOf(task[4]) == true) {
 					btnTasks.setBackground(Color.RED);
 					btnTasks.setForeground(Color.RED);
@@ -42,7 +47,13 @@ public class TaskViewer {
 					btnTasks.setBackground(Color.GREEN);
 					btnTasks.setForeground(Color.GREEN);
 				}
-				btnTasks.setBounds(50, 100, 50, 50);
+				if (y < 450) {
+					btnTasks.setBounds(x, y, b, h);
+					y = y + 50;
+				} else {
+					btnTasks.setBounds(xx, y, b, h);
+					y = y + 30;
+				}
 				TasksonDay.add(btnTasks);
 				// System.out.println(task[0]);
 			}
@@ -51,7 +62,7 @@ public class TaskViewer {
 
 		}
 		TasksonDay.setBorder(BorderFactory.createTitledBorder("Tasks"));
-		TasksonDay.setBounds(100, 100, 400, 310);
+		TasksonDay.setBounds(100, 100, 500, 500);
 
 		frmMain.setResizable(false);
 		frmMain.setVisible(true);
