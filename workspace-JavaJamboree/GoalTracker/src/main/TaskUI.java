@@ -39,7 +39,7 @@ public class TaskUI implements ActionListener {
 	JRadioButton r1, r2, r3, r4;
 	DateFormat format = new SimpleDateFormat("mm-dd-yyyy");
 	JComboBox<String> c;
-	List<String> Goals = new ArrayList<String>();
+	List<String> Goals;
 	private ArrayList<Task> allTasks = new ArrayList<Task>();
 	private int idCount;
 
@@ -88,6 +88,7 @@ public class TaskUI implements ActionListener {
 		frmTask.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		try (BufferedReader br = new BufferedReader(new FileReader("src/goals.csv"))) {
+			Goals = new ArrayList<String>();
 			String sCurrentLine;
 			while ((sCurrentLine = br.readLine()) != null) {
 				if (!Goals.contains(sCurrentLine)) {
