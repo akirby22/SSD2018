@@ -279,7 +279,7 @@ public class GoalTracker {
 				TaskUI tasks = new TaskUI();
 				tasks.fillList(day, currentMonth + 1, currentYear);
 				addActionListener();
-				System.out.println(day + " " + currentMonth + 1 + " " + currentYear);
+				System.out.println(day + " " + (currentMonth+1) + " " + currentYear);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

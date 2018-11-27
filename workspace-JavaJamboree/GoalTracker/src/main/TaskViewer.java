@@ -35,7 +35,7 @@ public class TaskViewer {
 			String sCurrentLine;
 			int x = 50;
 			int y = 100;
-			int b = 70;
+			int b = 400;
 			int h = 40;
 			int xx = 100;
 			while ((sCurrentLine = br.readLine()) != null) {
@@ -51,8 +51,8 @@ public class TaskViewer {
 					btnTasks.setForeground(Color.ORANGE);
 				}
 				if (Boolean.valueOf(task[5]) == false && Boolean.valueOf(task[4]) == true) {
-					btnTasks.setBackground(Color.YELLOW);
-					btnTasks.setForeground(Color.YELLOW);
+					btnTasks.setBackground(Color.GREEN);
+					btnTasks.setForeground(Color.GREEN);
 				}
 				if (y < 450) {
 					btnTasks.setBounds(x, y, b, h);
