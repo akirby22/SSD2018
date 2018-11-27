@@ -4,8 +4,6 @@ import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
 
-import main.TableWithButtonDemo.ClientsTableButtonRenderer;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -191,7 +189,6 @@ public class GoalTracker {
 		int h = 40;
 		int yy = 700;
 		int xx = 30;
-		// 97, 335, 90, 525
 		for (int i = 1; i <= nod; i++) {
 			btnDate = new JButton(Integer.toString(i));
 			if (x < 500) {
@@ -202,7 +199,7 @@ public class GoalTracker {
 				xx = xx + 30;
 			}
 			pnlCalendarMonth.add(btnDate);
-			btnDate.addActionListener(new btnDate_Action(i, month, year));
+			btnDate.addActionListener(new btnDate_Action(i));
 		}
 	}
 
@@ -262,19 +259,14 @@ public class GoalTracker {
 	}
 
 	static class btnDate_Action implements ActionListener {
-
 		private int day;
-		private int month;
-		private int year;
 
-		btnDate_Action(int day, int month, int year) {
+		btnDate_Action(int day) {
 			this.day = day;
-			this.month = month;
-			this.year = year;
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			System.out.println(day + " " + month + " " + year);
+			System.out.println(day + " " + currentMonth + " " + currentYear);
 		}
 	}
 
