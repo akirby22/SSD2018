@@ -162,26 +162,15 @@ public class TaskUI implements ActionListener {
 			});
 
 			/**
-			 * Saves entered data into allTasks ArrayList and into .csv file.
+			 * Saves entered data into allTasks ArrayList and into csv file.
 			 */
 			btnSave.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					addTasks(t1.getText(), t2.getText(), Integer.parseInt(t3.getText()), Integer.parseInt(t4.getText()), Integer.parseInt(t5.getText()), Integer.parseInt(t6.getText()), Integer.parseInt(t7.getText()), Integer.parseInt(t8.getText()), r1.isSelected(), r3.isSelected(), getIDCount(), 1,
 							"tempgoaldesc", 0);
-					/*Task task;
-					task = new Task(t1.getText(), t2.getText(), 0, 0, r1.isSelected(), r3.isSelected(), 0, 0,
-							"tempgoaldesc", 0);*/
 					FileWriter fileWriter;
 					try {
-						/*fileWriter = new FileWriter("src/tasks.csv", true);
-						BufferedWriter br = new BufferedWriter(fileWriter);
-						br.write(task.getTitle() + "\t" + task.getDescription() + "\t" + task.getStartDate() + "\t"
-								+ task.getEndDate() + "\t" + task.getImportant() + "\t" + task.getPriority() + "\t"
-								+ "0" + "\t" + "0" + task.getGoalDescription() + "\t" + task.getGoalID() + "\n");
-						System.out.println("task updated");
-						br.close();
-						frmTask.dispose();*/
 						fileWriter = new FileWriter("src/tasks.csv", true);
 						BufferedWriter br = new BufferedWriter(fileWriter);
 						for(int i = 0; i < allTasks.size(); i++) {
@@ -346,7 +335,7 @@ public class TaskUI implements ActionListener {
 		//addTasks(newTask);
 	}
 	
-	public static void printTasks() { //today = 0
+	/*public static void printTasks() { //today = 0
 		for(int i = 1; i < 10; i++) {//for each day (only 10 here)
 			System.out.println("Day " + i);
 			for(int j = 1; j < 5; j++) {//for each priority
@@ -361,5 +350,36 @@ public class TaskUI implements ActionListener {
 			}
 			System.out.println("----------------------------");
 		}
+	}*/
+	
+	/**
+	 * Fills the day.csv file.
+	 * @param day an int.
+	 * @param month an int.
+	 * @param year an int.
+	 */
+	public static void fillList(int day, int month, int year) {
+		int clickedDay = day + convertDate(month, 1, year);
+		FileWriter fileWriter;
+		try {
+			fileWriter = new FileWriter("src/day.csv", false);
+			BufferedWriter br = new BufferedWriter(fileWriter);
+			for(int i = 0; i < allTasks.size(); i++) {
+				Task task = allTasks.get(i);
+				for (int j = 1; j < 5; j++) {
+					if (task.getStartDate() == clickedDay && task.getPriority() == j) {
+						br.write(task.getTitle() + "\t" + task.getDescription() + "\t" + task.getStartDate() + "\t"
+								+ task.getEndDate() + "\t" + task.getUrgent() + "\t" + task.getImportant() + "\t"
+								+ task.getID() + "\t" + task.getTaskNum() + task.getGoalDescription() + "\t"
+								+ task.getGoalID() + "\n");
+					}
+				}
+			}
+			System.out.println("day.csv updated");
+			br.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
+	
 }

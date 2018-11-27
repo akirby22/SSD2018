@@ -1,0 +1,166 @@
+\section{main.\+Task\+UI Class Reference}
+\label{classmain_1_1_task_u_i}\index{main.\+Task\+UI@{main.\+Task\+UI}}
+
+
+Inherits Action\+Listener.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ action\+Performed} (Action\+Event e)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \textbf{ get\+I\+D\+Count} ()
+\item 
+static void \textbf{ add\+Tasks} (String titl, String desc, int s\+Month, int s\+Day, int s\+Year, int e\+Month, int e\+Day, int e\+Year, boolean urg, boolean imp, int id, int fT, String goal\+Desc, int g\+ID)
+\item 
+static int \textbf{ convert\+Date} (int Month, int Day, int Year)
+\item 
+static void \textbf{ create\+Tasks} (Task task)
+\item 
+static void \textbf{ delete\+Tasks} (Task task)
+\item 
+static void \textbf{ update\+Task} (Task old\+Task, Task new\+Task)
+\item 
+static void \textbf{ print\+Tasks} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static int \textbf{ id\+Count}
+\item 
+static Array\+List$<$ Task $>$ \textbf{ all\+Tasks} = new Array\+List$<$Task$>$()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\label{classmain_1_1_task_u_i_ab9681721a6fd3d4cb8169c5633fed8c4}} 
+\index{main\+::\+Task\+UI@{main\+::\+Task\+UI}!action\+Performed@{action\+Performed}}
+\index{action\+Performed@{action\+Performed}!main\+::\+Task\+UI@{main\+::\+Task\+UI}}
+\subsubsection{action\+Performed()}
+{\footnotesize\ttfamily void main.\+Task\+U\+I.\+action\+Performed (\begin{DoxyParamCaption}\item[{Action\+Event}]{e }\end{DoxyParamCaption})}
+
+Task screen G\+UI. Closes task screen.
+
+Saves entered data into all\+Tasks Array\+List and into csv file.
+
+Deletes all instances of the displayed task.\mbox{\label{classmain_1_1_task_u_i_aa8973f0240b645a9804aee031750cc2f}} 
+\index{main\+::\+Task\+UI@{main\+::\+Task\+UI}!add\+Tasks@{add\+Tasks}}
+\index{add\+Tasks@{add\+Tasks}!main\+::\+Task\+UI@{main\+::\+Task\+UI}}
+\subsubsection{add\+Tasks()}
+{\footnotesize\ttfamily static void main.\+Task\+U\+I.\+add\+Tasks (\begin{DoxyParamCaption}\item[{String}]{titl,  }\item[{String}]{desc,  }\item[{int}]{s\+Month,  }\item[{int}]{s\+Day,  }\item[{int}]{s\+Year,  }\item[{int}]{e\+Month,  }\item[{int}]{e\+Day,  }\item[{int}]{e\+Year,  }\item[{boolean}]{urg,  }\item[{boolean}]{imp,  }\item[{int}]{id,  }\item[{int}]{fT,  }\item[{String}]{goal\+Desc,  }\item[{int}]{g\+ID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Converts the info from start and end dates and creates tasks. 
+\begin{DoxyParams}{Parameters}
+{\em titl} & a String title. \\
+\hline
+{\em desc} & a String description. \\
+\hline
+{\em s\+Month} & an int starting month. \\
+\hline
+{\em s\+Day} & an int starting day. \\
+\hline
+{\em s\+Year} & an int starting year. \\
+\hline
+{\em e\+Month} & an int ending month. \\
+\hline
+{\em e\+Day} & an int ending day. \\
+\hline
+{\em e\+Year} & and int ending year. \\
+\hline
+{\em urg} & a boolean urgency. \\
+\hline
+{\em imp} & a boolean importance. \\
+\hline
+{\em id} & and int task ID. \\
+\hline
+{\em fT} & and int task number. \\
+\hline
+{\em goal\+Desc} & a String description. \\
+\hline
+{\em g\+ID} & an int goal ID. \\
+\hline
+\end{DoxyParams}
+\mbox{\label{classmain_1_1_task_u_i_a942f6ed59ffa1ac7ee7f523ab6ca9aff}} 
+\index{main\+::\+Task\+UI@{main\+::\+Task\+UI}!convert\+Date@{convert\+Date}}
+\index{convert\+Date@{convert\+Date}!main\+::\+Task\+UI@{main\+::\+Task\+UI}}
+\subsubsection{convert\+Date()}
+{\footnotesize\ttfamily static int main.\+Task\+U\+I.\+convert\+Date (\begin{DoxyParamCaption}\item[{int}]{Month,  }\item[{int}]{Day,  }\item[{int}]{Year }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Converts the given month, day, and year into the day if the year 1-\/365. 
+\begin{DoxyParams}{Parameters}
+{\em Month} & an int. \\
+\hline
+{\em Day} & an int. \\
+\hline
+{\em Year} & an int. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an int day of year. 
+\end{DoxyReturn}
+\mbox{\label{classmain_1_1_task_u_i_ac7259349aa5f2aea18a066f5a979f9f7}} 
+\index{main\+::\+Task\+UI@{main\+::\+Task\+UI}!create\+Tasks@{create\+Tasks}}
+\index{create\+Tasks@{create\+Tasks}!main\+::\+Task\+UI@{main\+::\+Task\+UI}}
+\subsubsection{create\+Tasks()}
+{\footnotesize\ttfamily static void main.\+Task\+U\+I.\+create\+Tasks (\begin{DoxyParamCaption}\item[{Task}]{task }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates a task for each day the task is present. 
+\begin{DoxyParams}{Parameters}
+{\em task} & a Task object. \\
+\hline
+\end{DoxyParams}
+\mbox{\label{classmain_1_1_task_u_i_aaf62cc2f591422ee8ea9215fc0e0de64}} 
+\index{main\+::\+Task\+UI@{main\+::\+Task\+UI}!delete\+Tasks@{delete\+Tasks}}
+\index{delete\+Tasks@{delete\+Tasks}!main\+::\+Task\+UI@{main\+::\+Task\+UI}}
+\subsubsection{delete\+Tasks()}
+{\footnotesize\ttfamily static void main.\+Task\+U\+I.\+delete\+Tasks (\begin{DoxyParamCaption}\item[{Task}]{task }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Deletes all instances of a task. 
+\begin{DoxyParams}{Parameters}
+{\em task} & a Task object. \\
+\hline
+\end{DoxyParams}
+\mbox{\label{classmain_1_1_task_u_i_a55fd82d2d4e828bee09c473b65b06232}} 
+\index{main\+::\+Task\+UI@{main\+::\+Task\+UI}!get\+I\+D\+Count@{get\+I\+D\+Count}}
+\index{get\+I\+D\+Count@{get\+I\+D\+Count}!main\+::\+Task\+UI@{main\+::\+Task\+UI}}
+\subsubsection{get\+I\+D\+Count()}
+{\footnotesize\ttfamily static int main.\+Task\+U\+I.\+get\+I\+D\+Count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gets the generated unique task ID. \begin{DoxyReturn}{Returns}
+the int task ID. 
+\end{DoxyReturn}
+\mbox{\label{classmain_1_1_task_u_i_ab8829737e1e3e206c3d94ad3097b1df1}} 
+\index{main\+::\+Task\+UI@{main\+::\+Task\+UI}!print\+Tasks@{print\+Tasks}}
+\index{print\+Tasks@{print\+Tasks}!main\+::\+Task\+UI@{main\+::\+Task\+UI}}
+\subsubsection{print\+Tasks()}
+{\footnotesize\ttfamily static void main.\+Task\+U\+I.\+print\+Tasks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{classmain_1_1_task_u_i_a9d72cad3179b9312d7ffe042092e5f6f}} 
+\index{main\+::\+Task\+UI@{main\+::\+Task\+UI}!update\+Task@{update\+Task}}
+\index{update\+Task@{update\+Task}!main\+::\+Task\+UI@{main\+::\+Task\+UI}}
+\subsubsection{update\+Task()}
+{\footnotesize\ttfamily static void main.\+Task\+U\+I.\+update\+Task (\begin{DoxyParamCaption}\item[{Task}]{old\+Task,  }\item[{Task}]{new\+Task }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\label{classmain_1_1_task_u_i_a05bb12a52cb66bc7ef6b0a001108bd06}} 
+\index{main\+::\+Task\+UI@{main\+::\+Task\+UI}!all\+Tasks@{all\+Tasks}}
+\index{all\+Tasks@{all\+Tasks}!main\+::\+Task\+UI@{main\+::\+Task\+UI}}
+\subsubsection{all\+Tasks}
+{\footnotesize\ttfamily Array\+List$<$Task$>$ main.\+Task\+U\+I.\+all\+Tasks = new Array\+List$<$Task$>$()\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\label{classmain_1_1_task_u_i_ac561a3128768f58d8c9ddeadc2edddf3}} 
+\index{main\+::\+Task\+UI@{main\+::\+Task\+UI}!id\+Count@{id\+Count}}
+\index{id\+Count@{id\+Count}!main\+::\+Task\+UI@{main\+::\+Task\+UI}}
+\subsubsection{id\+Count}
+{\footnotesize\ttfamily int main.\+Task\+U\+I.\+id\+Count\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\textbf{ Task\+U\+I.\+java}\end{DoxyCompactItemize}
