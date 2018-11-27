@@ -14,6 +14,10 @@ public class TaskViewer {
 	static Container pane;
 	static JPanel TasksonDay;
 
+	/**
+	 * Creates Task viewer jframe.
+	 * @throws IOException.
+	 */
 	TaskViewer() throws IOException {
 		frmMain = new JFrame("Goal Tracker Taks");
 		frmMain.setSize(700, 700);
@@ -23,6 +27,9 @@ public class TaskViewer {
 		pane.add(TasksonDay);
 		// frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		/**
+		 * Creates and colors the task buttons.
+		 */
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("src/day.csv"));
 			String sCurrentLine;

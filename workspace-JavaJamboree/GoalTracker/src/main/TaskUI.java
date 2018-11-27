@@ -449,7 +449,10 @@ public class TaskUI implements ActionListener {
 	 *            an int.
 	 */
 	public void fillList(int day, int month, int year) {
-		int clickedDay = day + convertDate(month, 1, year);
+		int clickedDay = (day - 1) + convertDate(month, 1, year);
+		System.out.println(clickedDay);
+		System.out.println(day);
+		System.out.println(convertDate(month, 1, year));
 		for(int i = 0; i < allTasks.size(); i++) {
 			System.out.println(allTasks.get(i).getTitle());
 		}
@@ -457,7 +460,7 @@ public class TaskUI implements ActionListener {
 		try {
 			fileWriter = new FileWriter("src/day.csv");
 			BufferedWriter br = new BufferedWriter(fileWriter);
-			System.out.println(allTasks.size());
+			//System.out.println(allTasks.size());
 			for (int i = 0; i < allTasks.size(); i++) {
 				Task task = allTasks.get(i);
 				for (int j = 1; j < 5; j++) {

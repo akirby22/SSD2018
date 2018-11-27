@@ -1,2 +1,5 @@
-test		335	336	true	true	0	2	1goal	0
-again		335	337	true	true	1	1	1goal	0
+1task		332	334	true	true	0	2	1goal	0
+2task	hi	332	334	false	true	1	2	1goal	0
+3 task		332	334	true	false	0	2	1goal	0
+5task		332	334	false	true	0	2	1goal	0
+hello		332	334	false	true	0	2	1goal	0

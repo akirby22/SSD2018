@@ -263,6 +263,9 @@ public class GoalTracker {
 		}
 	}
 
+	/**
+	 * Pulls up Task Viewer when date button is pushed.
+	 */
 	static class btnDate_Action implements ActionListener {
 		private int day;
 

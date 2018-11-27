@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['gdescription',['GDescription',['../classmodel_1_1_goal.html#ad06c51e41acda20069c830004ea39784',1,'model::Goal']]],
+  ['getdescription',['getDescription',['../classmodel_1_1_task.html#a8dc5a073ec12dc2747bda501f29a0127',1,'model::Task']]],
+  ['getenddate',['getEndDate',['../classmodel_1_1_task.html#adf5c6764d082faa390fcf333d7455fe7',1,'model::Task']]],
+  ['getgdescription',['getGDescription',['../classmodel_1_1_goal.html#a3630e85712196a7e9632e41aca3e10d4',1,'model::Goal']]],
+  ['getgoaldescription',['getGoalDescription',['../classmodel_1_1_task.html#a72d577693ab1c7f7076b85b630b83346',1,'model::Task']]],
+  ['getgoalid',['getGoalID',['../classmodel_1_1_task.html#ad15a864530e3510c0ecf56177b3dca7c',1,'model::Task']]],
+  ['getgtitle',['getGTitle',['../classmodel_1_1_goal.html#a0caa8caa2fa97341171f65c04f887ab5',1,'model::Goal']]],
+  ['getid',['getID',['../classmodel_1_1_task.html#aafb4129287eec41ca30df2845e991e17',1,'model::Task']]],
+  ['getidcount',['getIDCount',['../classmodel_1_1_task_test.html#ae5e39836bc7eea7256653c0ba830dfdc',1,'model::TaskTest']]],
+  ['getimportant',['getImportant',['../classmodel_1_1_task.html#a14c4d1d8b9882102334f9e83d2cf136b',1,'model::Task']]],
+  ['getnumdays',['getNumDays',['../classmodel_1_1_task.html#acb151d75bf4e696327fbbabb18033108',1,'model::Task']]],
+  ['getpriority',['getPriority',['../classmodel_1_1_task.html#a3e6030c0c2b09868b157c51642b02483',1,'model::Task']]],
+  ['getsize',['getSize',['../classmodel_1_1_task_test.html#a947e417a5547a484ba79c220eeb9004e',1,'model::TaskTest']]],
+  ['getstartdate',['getStartDate',['../classmodel_1_1_task.html#a651d415f333575368f812c47efcac710',1,'model::Task']]],
+  ['gettasknum',['getTaskNum',['../classmodel_1_1_task.html#adf5ceec1aefd6a042218605707c8f61a',1,'model::Task']]],
+  ['gettitle',['getTitle',['../classmodel_1_1_task.html#a3016babcf59132145ef35906075ea109',1,'model::Task']]],
+  ['geturgent',['getUrgent',['../classmodel_1_1_task.html#a1eabd41ad4d1743e219eba8d204642cf',1,'model::Task']]],
+  ['goal',['Goal',['../classmodel_1_1_goal.html',1,'model.Goal'],['../classmodel_1_1_goal.html#a644155c1120c9aea01bb7c2a308fa403',1,'model.Goal.Goal()']]],
+  ['goal_2ejava',['Goal.java',['../_goal_8java.html',1,'']]],
+  ['goaldescription',['goalDescription',['../classmodel_1_1_task.html#acac5f88033d284c85a01db79286f7ad5',1,'model::Task']]],
+  ['goalid',['goalID',['../classmodel_1_1_task.html#aabe3e64a814eeb376c3e21e658109bb5',1,'model::Task']]],
+  ['gtitle',['GTitle',['../classmodel_1_1_goal.html#a5633a90e3aaf4573ed9368af4304f303',1,'model::Goal']]]
+];
