@@ -3,13 +3,16 @@ package main;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
+
+import main.TableWithButtonDemo.ClientsTableButtonRenderer;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
 public class GoalTracker {
 	static JLabel lblMonth, lblYear;
-	static JButton btnPrev, btnNext, btnTask, btnGoal, btnSave, btnDelete, btnCancel;
+	static JButton btnPrev, btnNext, btnTask, btnGoal, btnSave, btnDelete, btnCancel, btnDate;
 	static JTable mnthTblCalendar, weekTblCalendar;
 	static JComboBox<String> cmbYear;
 	static JFrame frmMain, frmTask;
@@ -61,11 +64,18 @@ public class GoalTracker {
 		btnNext = new JButton("Next");
 		btnTask = new JButton("Add Task");
 		btnGoal = new JButton("Add Goal");
+
 		mtblCalendar = new DefaultTableModel() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public boolean isCellEditable(int rowIndex, int mColIndex) {
 				return true;
 			}
 		};
+
 		mnthTblCalendar = new JTable(mtblCalendar);
 		mstblCalendar = new JScrollPane(mnthTblCalendar);
 		pnlCalendarMonth = new JPanel(null);
@@ -75,6 +85,7 @@ public class GoalTracker {
 		btnPrev.addActionListener(new btnPrev_Action());
 		btnNext.addActionListener(new btnNext_Action());
 		cmbYear.addActionListener(new cmbYear_Action());
+
 		btnTask.addActionListener(new TaskUI());
 		btnGoal.addActionListener(new GoalUI());
 
@@ -88,8 +99,7 @@ public class GoalTracker {
 		pnlCalendarMonth.add(btnGoal);
 		pnlCalendarMonth.add(btnTask);
 
-
-		pnlCalendarMonth.setBounds(100, 100, 700, 610);
+		pnlCalendarMonth.setBounds(100, 100, 700, 750);
 		lblYear.setBounds(10, 335, 110, 525);
 		cmbYear.setBounds(97, 335, 90, 525);
 		btnPrev.setBounds(10, 45, 90, 25);
@@ -126,6 +136,9 @@ public class GoalTracker {
 		mnthTblCalendar.setRowHeight(90);
 		mtblCalendar.setColumnCount(7);
 		mtblCalendar.setRowCount(6);
+		mtblCalendar.getColumnCount();
+		// mtblCalendar.getColumnCount().setCellRenderer(new
+		// ClientsTableButtonRenderer());
 
 		for (int i = realYear - 100; i <= realYear + 100; i++) {
 			cmbYear.addItem(String.valueOf(i));
@@ -164,11 +177,33 @@ public class GoalTracker {
 		for (int i = 1; i <= nod; i++) {
 			int row = new Integer((i + som - 2) / 7);
 			int column = (i + som - 2) % 7;
+			// mtblCalendar.setValueAt(i, row, column);
+			// date = new JButton(Integer.toString(i));
 			mtblCalendar.setValueAt(i, row, column);
-			//insert print/button stuff here
+			;
+			// insert print/button stuff here
 		}
 
 		mnthTblCalendar.setDefaultRenderer(mnthTblCalendar.getColumnClass(0), new tblCalendarRenderer());
+		int x = 30;
+		int y = 630;
+		int b = 30;
+		int h = 40;
+		int yy = 700;
+		int xx = 30;
+		// 97, 335, 90, 525
+		for (int i = 1; i <= nod; i++) {
+			btnDate = new JButton(Integer.toString(i));
+			if (x < 500) {
+				btnDate.setBounds(x, y, b, h);
+				x = x + 30;
+			} else {
+				btnDate.setBounds(xx, yy, b, h);
+				xx = xx + 30;
+			}
+			pnlCalendarMonth.add(btnDate);
+			btnDate.addActionListener(new btnDate_Action(i, month, year));
+		}
 	}
 
 	static class tblCalendarRenderer extends DefaultTableCellRenderer {
@@ -223,6 +258,23 @@ public class GoalTracker {
 				currentYear = Integer.parseInt(b);
 				refreshCalendar(currentMonth, currentYear);
 			}
+		}
+	}
+
+	static class btnDate_Action implements ActionListener {
+
+		private int day;
+		private int month;
+		private int year;
+
+		btnDate_Action(int day, int month, int year) {
+			this.day = day;
+			this.month = month;
+			this.year = year;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			System.out.println(day + " " + month + " " + year);
 		}
 	}
 
